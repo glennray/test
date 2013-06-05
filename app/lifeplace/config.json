@@ -1,0 +1,356 @@
+{
+	"authString": "Basic Y290cjpQS1dsVE5Xc0FrcGZGQlBCRGQzY2dTYWhvTEpLNXNFa1JoVDRMZFJW",
+    "authUrl": "https://dashboard.bibleandjournalapp.com/api/Users/Authenticate",
+    "registerUrl": "https://dashboard.bibleandjournalapp.com/api/Users",
+    "validateEmailUrl": "https://dashboard.bibleandjournalapp.com/api/Users/IsEmailInUse",
+    "resetPasswordUrl":"https://dashboard.bibleandjournalapp.com/api/Users/ResetPassword",
+    "ios": {
+    	"views": { "url":"platform/v1/views/iphone.html", "version":7 },
+    	"tabletViews": { "url":"platform/v1/views/ipad.html", "version":7 },
+    	"css": { "url":"platform/v1/css/iphone.css", "version":7 },
+    	"tabletCss": { "url":"platform/v1/css/ipad.css", "version":7 },
+    	"transition":"slide"
+    },
+    "android": {
+    	"views": { "url":"platform/v1/views/android.html", "version":4 },
+    	"tabletViews": { "url":"platform/v1/views/android.html", "version":4 },
+    	"css": { "url":"platform/v1/css/android.css", "version":4 },
+    	"tabletCss": { "url":"platform/v1/css/android.css", "version":4 },
+    	"transition":"fade"
+    },
+    "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=603828128",
+    "googlePlayUrl":"http://googleplayurl.com",
+    "analyticsId":"UA-31814203-7",
+    "bajaAppId":"lifeplace",
+    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/lifeplace",
+    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
+    "facebook": {
+    	"appId":"405809322849390", "url":"https://www.facebook.com/lifeplace"
+    },
+    "twitter": {
+    	"url":"http://twitter.com/lifeplacechurch"
+    },
+    "menu": {
+        "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
+        "urlLearn":"http://bibleandjournalapp.com/support-videos/",
+        "urlSupport":"https://bibleandjournalapp.zendesk.com/anonymous_requests/new",
+        "urlBaja":"http://bibleandjournalapp.com/about/",
+        "urlPrivacy":"http://bibleandjournalapp.com/privacy-policy/",
+        "urlTerms":"http://bibleandjournalapp.com/terms-of-use/"
+    },
+	"modules": [
+		{ "id":"home", "version":1 },
+		{ "id":"baja", "version":2 },
+		{ "id":"audio", "version":1 },
+		{ "id":"bible", "version":3 },
+		{ "id":"journal", "version":4 },
+		{ "id":"media", "version":2 },
+		{ "id":"calendar", "version":1 },
+		{ "id":"utils", "version":1 },
+		{ "id":"music", "version":1 }
+	],
+	"home":{
+		"widgets": [
+			{ "type":"logo" },
+			{ "type":"reading-plan" },
+			{ "type":"container", "widgets":[
+				{ "title":"Events", "icon":"*", "tab":"clear", "click":"app.navigate('events')" },
+				{ "title":"Podcast", "icon":"!", "tab":"clear", "click":"app.navigate('media-categories?i=3', 'none')" },
+				{ "title":"Info", "icon":"5", "tab":"clear", "click":"app.navigate('media-categories?i=4', 'none')" },
+				{ "title":"Give", "icon":"X", "tab":"clear", "click":"baja.loadUrlExternal('https://lifeplace.com.au/give/')" },
+				{ "title":"Blog", "icon":":", "tab":"clear", "click":"app.navigate('media-categories?i=2', 'none')" },
+				{ "title":"Video", "icon":"N", "tab":"tabMedia", "click":"app.navigate('media-categories?i=0', 'none')" },
+				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
+				{ "title":"Live", "icon":"=", "tab":"tabHome", "click":"media.playItem(null, 1)" },
+				{ "title":"Calendar", "icon":"+", "tab":"clear", "click":"baja.loadUrlNative('https://www.google.com/calendar/embed?src=calendar@lifeplace.com.au&ctz=Australia/Brisbane')" }
+			]}
+		]
+	},
+    "tabs": [
+        {
+            "id": "tabHome",
+            "view": "home",
+            "label": "Home",
+            "icon": "L",
+            "defaultTab": true
+        },
+        {
+            "id": "tabMedia",
+            "view": "media-categories?i=0",
+            "label": "Video",
+            "icon": "N",
+            "defaultTab": false
+        },
+		{
+            "id": "tabPlan",
+            "view": "bible-plan",
+            "label": "Plan",
+            "icon": "O",
+            "defaultTab": false
+        },
+        {
+            "id": "tabBible",
+            "view": "bible",
+            "label": "Bible",
+            "icon": "U",
+            "defaultTab": false,
+            "click": "bible.showTextView(null, false)"
+        },
+        {
+            "id": "tabJournal",
+            "view": "journal",
+            "label": "Journal",
+            "icon": "M",
+            "defaultTab": false
+        }
+    ],
+    "sharing": {
+    	"sentByText": "Sent by Lifeplace Bible and Journal App.",
+    	"sentByHtml": " Sent by <a href='{storeUrl}'>Lifeplace Bible and Journal App</a>.",
+    	"sentByTwitter": "via @lifeplacechurch",
+		"facebook": {
+			"title": "Lifeplace",
+			"shareUrl":"http://lifeplace.com.au/",
+			"shareText":"Lifeplace Brisbane Churches "
+		},
+		"twitter": {
+			"shareUrl":"@lifeplacechurch",
+			"shareText":""
+		},
+		"email": {
+			"shareSubject":"Check out my Bible and Journal App from Lifeplace",
+			"shareBody":"I am using Lifeplace Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
+		}
+	},
+    "bible": {
+        "urlBooks": "https://dashboard.bibleandjournalapp.com/api/books",
+        "urlChapter": "https://dashboard.bibleandjournalapp.com/api/chapters?version={0}&bookId={1}&chapter={2}&format={3}",
+        "urlAudio": "https://dashboard.bibleandjournalapp.com/api/Chapters/GetAudio?version={0}&query={1}",
+        "versions": [
+            {
+                "name": "Amplified Bible",
+                "id": "AMP",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Beibl Cymraeg Newydd 2004",
+				"id": "BCN",
+				"audio": false,
+                "format":"text"
+			},
+			{
+				"name": "beibl.net Testament Newydd 2011",
+				"id": "BNET",
+				"audio": false,
+                "format":"text"
+			},
+            {
+    			"name": "Beibl William Morgan 1620",
+				"id": "BWM",
+				"audio": false,
+                "format":"text"
+			},
+            {
+                "name": "Contemporary English Version",
+                "id": "CEV",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "English Standard Version",
+                "id": "ESV",
+                "audio": true,
+                "format":"html"
+            },
+            {
+                "name": "Good News Bible, Anglicised Version",
+                "id": "GNB",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "Good News Translation",
+                "id": "GNT",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, British 1769 Edition",
+                "id": "KJV",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, American 1867 Edition",
+                "id": "KJVA",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "New American Standard Bible",
+                "id": "NASB",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "Eadar-theangachadh Ur",
+                "id": "NGT",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Versión Reina-Valera 1960",
+				"id": "RVR60",
+				"audio": false,
+                "format":"text"
+			}
+        ],
+        "plans": [
+            {
+                "name": "Pursue God Reading Plan",
+                "url": "/reading-plans/pursuegod.json"
+            },
+            {
+                "name": "Life Journal Reading Plan",
+                "url": "/reading-plans/pursuegod.json"
+            }
+        ],
+        "selectedPlan": {
+            "name": "Pursue God Reading Plan",
+            "url": "/reading-plans/pursuegod.json",
+            "startMonthDay": "1/1"
+        }
+    },
+    "journal": {
+        "urlJournals": "https://dashboard.bibleandjournalapp.com/api/Journals/ByUser/{id}",
+        "urlEntries": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/ByJournalPaged/{id}?page={p}&size={s}",
+        "urlSaveJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlDeleteJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlSaveEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}",
+        "urlDeleteEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}"
+    },
+	"calendar": {
+		"feedUrl":"http://lifeplace.bibleandjournalapp.com/feed/", "type":"rss", "imgRoot":""
+	},
+    "media": [
+        {
+			"index":0,
+            "id": "ondemand",
+            "title": "Video On Demand",
+            "type": "rss",
+            "wifiOnly":true,
+            "url": {
+				"android": "http://vimeo.com/lifeplace/videos/rss",
+				"iphone": "http://vimeo.com/lifeplace/videos/rss",
+				"ipad": "http://vimeo.com/lifeplace/videos/rss"
+			},
+            "itemType": "video",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"urlVideo": { 
+					"method": "find", 
+					"node": {
+						"iphone":"link",
+						"ipad":"link",
+						"android":"link"
+					}
+				},
+				"length": { "method":"find", "node":"enclosure", "attribute":"length" },
+				"thumbnail": { "method":"find", "node":"thumbnail", "attribute":"url" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":1,
+            "id": "live",
+            "title": "Live Service",
+            "type": "live",
+            "wifiOnly":true,
+            "schedule": { 
+            	"timezone":10, 
+            	"events":[
+					{ "dayOfWeek":0, "startTime":"10:00", "endTime":"12:00" },
+					{ "dayOfWeek":0, "startTime":"17:00", "endTime":"19:00" }
+				]
+			},
+            "url": {
+				"android": "http://lifeplace.sermon.tv/l/main",
+				"ipad": "http://lifeplace.sermon.tv/l/main",
+				"iphone": "http://lifeplace.sermon.tv/l/main"
+			},
+            "itemType": "live"
+        },
+        {
+			"index":2,
+            "id": "blog",
+            "title": "Pastor's Blog",
+            "type": "rss",
+            "wifiOnly":false,
+            "url": {
+				"android": "http://www.benwindle.com/feed/",
+				"iphone": "http://www.benwindle.com/feed/",
+				"ipad": "http://www.benwindle.com/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"descriptionx": { "method":"find", "node":"description" },
+				"content": { "method":"scrape", "urlNode":"link", "contentSelector":".entry-content" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":3,
+            "id": "podcast",
+            "title": "Podcast",
+            "type": "rss",
+            "url": {
+				"android": "http://lifeplace.com.au/Podcasts/lifeplace.rss",
+				"ipad": "http://lifeplace.com.au/Podcasts/lifeplace.rss",
+				"iphone": "http://lifeplace.com.au/Podcasts/lifeplace.rss"
+			},
+            "itemType": "audio",
+			"maxItems":50,
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"description": { "method":"find", "node":"description" },
+				"author": { "method": "find", "node":"author" },
+				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
+				"length": { "method":"find", "node":"duration" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+		{
+			"index":4,
+            "id": "info",
+            "title": "Church Info",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://lifeplace.bibleandjournalapp.com/info/feed/",
+				"iphone": "http://lifeplace.bibleandjournalapp.com/info/feed/",
+				"ipad": "http://lifeplace.bibleandjournalapp.com/info/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"description": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" },
+				"thumbnail": { "method":"find", "node":"enclosure", "attribute":"url" }
+			}
+        }
+    ]
+}

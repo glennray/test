@@ -1,0 +1,206 @@
+{
+	"authString": "Basic Y290cjpQS1dsVE5Xc0FrcGZGQlBCRGQzY2dTYWhvTEpLNXNFa1JoVDRMZFJW",
+    "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=612048427",
+    "googlePlayUrl":"http://googleplayurl.com",
+    "analyticsId":"UA-31814203-6",
+    "bajaAppId":"planetshakers",
+    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/planetshakers",
+    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
+    "facebook": {
+    	"appId":"365911856855516", "url":"https://www.facebook.com/planetshakers"
+    },
+    "twitter": {
+    	"url":"http://twitter.com/planetshakers"
+    },
+	"instagram": {
+    	"url":"http://instagram.com/planetshakers"
+    },
+	"home":{
+		"widgets": [
+			{ "type":"logo" },
+			{ "type":"reading-plan" },
+			{ "type":"container", "widgets":[
+				{ "title":"Live", "icon":"=", "tab":"tabHome", "click":"baja.loadUrlNative('http://www.planetshakers.com/kingdom/')" },
+				{ "title":"Music", "icon":">", "tab":"clear", "click":"app.navigate('music-collections', 'none')" },
+				{ "title":"Video", "icon":"N", "tab":"clear", "click":"app.navigate('media-categories?i=0', 'none')" },
+				{ "title":"Conference", "icon":"+", "tab":"clear", "click":"app.navigate('media-categories?i=3', 'none')" },
+				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
+				{ "title":"Instagram", "icon":"?", "tab":"clear", "click":"baja.loadUrlNative(config.instagram.url)" },
+				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
+				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
+				{ "title":"Journal", "icon":"M", "tab":"tabJournal", "click":"app.navigate('journal')" }
+			]}
+		]
+	},
+    "tabs": [
+        {
+            "id": "tabHome",
+            "view": "home",
+            "label": "Home",
+            "icon": "L",
+            "defaultTab": true
+        },
+        {
+            "id": "tabMedia",
+            "view": "media-categories?i=2",
+            "label": "Podcast",
+            "icon": "!",
+            "defaultTab": false
+        },
+		{
+            "id": "tabPlan",
+            "view": "bible-plan",
+            "label": "Plan",
+            "icon": "O",
+            "defaultTab": false
+        },
+        {
+            "id": "tabBible",
+            "view": "bible",
+            "label": "Bible",
+            "icon": "U",
+            "defaultTab": false,
+            "click": "bible.showTextView(null, false)"
+        },
+        {
+            "id": "tabJournal",
+            "view": "journal",
+            "label": "Journal",
+            "icon": "M",
+            "defaultTab": false
+        }
+    ],
+    "sharing": {
+    	"sentByText": "Sent by Planetshakers Bible and Journal App.",
+    	"sentByHtml": " Sent by <a href='{storeUrl}'>Planetshakers Bible and Journal App</a>.",
+    	"sentByTwitter": "via @Planetshakers",
+		"facebook": {
+			"title": "Planetshakers",
+			"shareUrl":"http://planetshakers.com",
+			"shareText":"Planetshakers"
+		},
+		"twitter": {
+			"shareUrl":"@Planetshakers",
+			"shareText":""
+		},
+		"email": {
+			"shareSubject":"Check out my Bible and Journal App from Planetshakers",
+			"shareBody":"I am using Planetshakers Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
+		}
+	},
+    "bible": {
+        "selectedPlan": {
+            "name": "Pursue God Reading Plan",
+            "url": "/reading-plans/pursuegod.json",
+            "startMonthDay": "1/1"
+        }
+    },
+	"music": {
+		"title":"Planetshakers",
+		"collectionsTitle":"Albums by release date",
+		"artistId":"13545609",
+		"feeds":{
+			"android": { 
+				"type":"amazon",
+				"urlCollections":"https://dashboard.bibleandjournalapp.com/resourceslive/app/planetshakers/assets/albums_planetshakers.json"
+			},
+			"ios": {
+				"type":"itunes",
+				"urlCollections":"http://itunes.apple.com/lookup?id={artistId}&entity=album",
+				"urlTracks":"http://itunes.apple.com/lookup?id={collectionId}&entity=song"
+			}
+		}
+	},
+    "media": [
+        {
+			"index":0,
+            "id": "ondemand",
+            "title": "Video On Demand",
+            "type": "rss",
+            "wifiOnly":true,
+            "url": {
+				"android": "https://gdata.youtube.com/feeds/base/users/planetshakerstv/uploads?max-results=50",
+				"iphone": "https://gdata.youtube.com/feeds/base/users/planetshakerstv/uploads?max-results=50",
+				"ipad": "https://gdata.youtube.com/feeds/base/users/planetshakerstv/uploads?max-results=50"
+			},
+            "itemType": "video",
+			"items": {
+				"xmlpath":"entry",
+				"id": { "method":"find", "node":"id" },
+				"date": { "method":"find", "node":"published" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"name" },
+				"urlVideo": { 
+					"method": "find",
+					"node": {
+						"iphone":"link",
+						"ipad":"link",
+						"android":"link"
+					},
+					"attribute":"href"
+				},
+				"urlSocial": { "method":"find", "node":"link", "attribute":"href" }
+			}
+        },
+        {
+			"index":1,
+            "id": "live",
+            "title": "Live Service",
+            "type": "live",
+            "wifiOnly":true,
+            "schedule": { 
+            	"timezone":11, 
+            	"events":[
+					{ "dayOfWeek":2, "startTime":"19:30", "endTime":"23:30" },
+					{ "dayOfWeek":3, "startTime":"19:30", "endTime":"23:30" },
+					{ "dayOfWeek":4, "startTime":"19:30", "endTime":"23:30" }
+				]
+			},
+            "url": {
+				"android": "http://wpc.a1a6.edgecastcdn.net/80A1A6/transcoder01.faithnetwork.com/planetshakersRepeater/planetshakerslive.stream/playlist.m3u8",
+				"ipad": "http://wpc.a1a6.edgecastcdn.net/80A1A6/transcoder01.faithnetwork.com/planetshakersRepeater/planetshakerslive.stream/playlist.m3u8",
+				"iphone": "http://wpc.a1a6.edgecastcdn.net/80A1A6/transcoder01.faithnetwork.com/planetshakersRepeater/planetshakerslive.stream/playlist.m3u8"
+			},
+            "itemType": "live"
+        },
+		{
+			"index":2,
+            "id": "podcast",
+            "title": "Podcast",
+            "type": "rss",
+            "url": {
+				"android": "http://www.planetshakers.com/pspodcast/planetshakers/",
+				"ipad": "http://www.planetshakers.com/pspodcast/planetshakers/",
+				"iphone": "http://www.planetshakers.com/pspodcast/planetshakers/"
+			},
+            "itemType": "audio",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"creator" },
+				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
+				"length": { "method":"find", "node":"duration" }
+			}
+        },
+		{
+			"index":3,
+			"id":"conferences",
+			"title":"Conferences",
+			"type":"rss",
+			"url": {
+				"android": "https://dashboard.bibleandjournalapp.com/resourceslive/app/planetshakers/assets/ps_conferences.xml",
+				"ipad": "https://dashboard.bibleandjournalapp.com/resourceslive/app/planetshakers/assets/ps_conferences.xml",
+				"iphone": "https://dashboard.bibleandjournalapp.com/resourceslive/app/planetshakers/assets/ps_conferences.xml"
+			},
+			"itemType":"link",
+			"sortDirection":"asc",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"link": { "method":"find", "node":"link" }
+			}
+		}
+    ]
+}

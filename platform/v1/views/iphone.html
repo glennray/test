@@ -1,0 +1,650 @@
+<!-- NON-KENDO ELEMENTS -->
+<div id="overlay" ontouchstart="baja.toggleMenu();return false;"></div>
+
+<div id="audiomenu">
+	<span class="audio-button" onclick="audio.stop()" data-glyph-audio="F"></span>
+	<span id="audio-next" class="audio-button nav" onclick="audio.next()" data-glyph-audio=";"></span>
+	<span id="audio-previous" class="audio-button nav" onclick="audio.previous()" data-glyph-audio="D"></span>
+	<div id="audio-title"></div>
+	<audio id="audio-player" controls="controls" style="width:100%;" onended="audio.next()"></audio>
+</div>
+
+<div id="menu" style="display:block !important;">
+	<div class="scroll">
+		<div class="list-header gradient">Account</div>
+		<ul>
+			<li id="menu-item-signout"><a data-glyph-gray="F" onclick="baja.logout()">&nbsp;&nbsp;Sign Out</a></li>
+			<li id="menu-item-signin"><a data-glyph-gray="V" onclick="baja.showSignIn(true)">&nbsp;&nbsp;Sign In</a></li>
+			<li><a data-glyph-gray="S" href="#settings">&nbsp;&nbsp;Settings</a></li>
+			<li id="menu-item-account"><a data-glyph-gray="V" href="#register">&nbsp;&nbsp;Manage Account</a></li>
+		</ul>
+
+		<div class="list-header gradient">Help Center</div>
+		<ul>
+			<li><a data-glyph-gray="Z" class="button-external-url" data-url="Learn">&nbsp;&nbsp;Learn the Basics</a></li>
+			<li><a data-glyph-gray="a" class="button-external-url" data-url="Support">&nbsp;&nbsp;Contact Support</a></li>
+		</ul>
+
+		<div class="list-header gradient">About</div>
+		<ul>
+			<li><a data-glyph-gray="X" class="button-external-url" data-url="Baja">&nbsp;&nbsp;Bible &amp; Journal App</a></li>
+			<li><a data-glyph-gray="Q" class="button-external-url" data-url="Privacy">&nbsp;&nbsp;Privacy Policy</a></li>
+			<li><a data-glyph-gray="P" class="button-external-url" data-url="Terms">&nbsp;&nbsp;Terms of Use</a></li>
+		</ul>
+
+		<div id="menu-share-bottom">
+			<div class="list-header gradient">Share With A Friend</div>
+			<ul style="margin-bottom:20px;">
+				<li><a data-glyph-gray="T" onclick="baja.shareFromMenu('facebook')">&nbsp;&nbsp;Facebook</a></li>
+				<li><a data-glyph-gray="R" onclick="baja.shareFromMenu('twitter')">&nbsp;&nbsp;Twitter</a></li>
+				<li><a data-glyph-gray="J" onclick="baja.shareFromMenu('mail')">&nbsp;&nbsp;Email</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="menu-footer" class="gradient">
+		<small>Share With A Friend</small>
+		<table class="button-grid smaller">
+		<tr>
+			<td><a class="facebook" ontouchstart="baja.shareFromMenu('facebook')"></a></td>
+			<td><a class="twitter" ontouchstart="baja.shareFromMenu('twitter')"></a></td>
+			<td><a class="email" ontouchstart="baja.shareFromMenu('mail')"></a></td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+
+<!-- LAYOUTS -->
+<div data-role="layout" data-id="main">
+	<ul data-role="actionsheet" id="sharing">
+		<li>
+			<div style="height:160px;width:100%;">
+				<table class="button-grid">
+					<tr>
+						<td><a class="share-facebook" onclick="baja.share('facebook')"></a>Facebook</td>
+						<td><a class="share-twitter" onclick="baja.share('twitter')"></a>Twitter</td>
+						<td><a class="share-text" onclick="baja.share('message')"></a>Message</td>
+					</tr>
+					<tr>
+						<td><a class="share-email" onclick="baja.share('mail')"></a>Email</td>
+						<td><a class="share-copy" onclick="baja.share('copy')"></a>Copy</td>
+						<td><a class="share-x"></a></td>
+					</tr>
+				</table>
+			</div>
+		</li>
+	</ul>
+	<div data-role="footer">
+		<div id="custom-tabstrip" data-role="tabstrip"></div>
+	</div>
+</div>
+
+<div data-role="layout" data-id="notabs"></div>
+
+
+<!-- BIBLE -->
+<div data-role="view" id="bible" data-model="bible" data-init="bible.initTextView" data-show="bible.showTextView">
+    <header data-role="header">
+        <div id="navbar-bible" data-role="navbar">
+            <a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+            <a data-role="button" data-click="bible.navBooks" style="margin:0;padding:0;">
+            	<span data-role="view-title" style="color:#000;">Title</span>
+            	<span id="bible-title-down" data-glyph-tiny="-"></span>
+			</a>
+            <a id="btn-bible-version" data-role="button" data-align="right" href="#bible-versions"><span data-bind="text:version.id"></span></a>
+        </div>
+		<div class="page-title" id="bible-toolbar-top" style="display:none;">
+			<div class="subtitle" data-bind="text:planDayTitle"></div>
+		</div>
+    </header>
+
+    <div data-role="header" id="bible-toolbar-bottom">
+        <a data-role="button" data-glyph-nav="," data-click="bible.navigate" data-bind="visible:isLeftNavEnabled" rel="right" class="left"></a>
+		<a data-role="button" data-glyph-nav="!" id="bible-button-audio" data-click="bible.playChapter" data-bind="visible:isAudioAvailable" class="left2"></a>
+        <a data-role="button" data-glyph-nav="1" id="bible-button-share" class="right2" data-click="bible.share" style="display:none;"></a>
+        <a data-role="button" data-glyph-nav="." data-click="bible.navigate" data-bind="visible:isRightNavEnabled" data-click="bible.navigate" rel="left" class="right"></a>
+    </div>
+    <div id="divBibleText"><p id="bible-content"></p></div>
+    <div id="bible-overlay"></div>
+</div>
+
+<div data-role="view" id="bible-plan" data-model="bible" data-init="bible.initPlanView" data-show="bible.showPlanView">
+    <header data-role="header">
+        <div id="navbar-plan" data-role="navbar">
+        	<a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+    		<span data-role="view-title" class="title">Reading Plan Name</span>
+			<a data-role="button" data-align="right" data-click="bible.playPlanAudio" data-glyph-gray="!"></a>
+        </div>
+    </header>
+
+    <div id="plan-header">
+		<a data-role="button" data-click="bible.navigatePlan" rel="right" class="left" data-glyph-small=","></a>
+		<span data-bind="text:planDayDate" style="text-align:center;"></span>
+		<a data-role="button" data-click="bible.navigatePlan" rel="left" class="right" data-glyph-small="."></a>
+    </div>
+
+    <ul id="list-bible-plan-passages"></ul>
+    <br/><br/><br/>
+</div>
+
+<div data-role="view" id="bible-versions" data-title="Select Version" data-show="bible.loadVersions" data-transition="overlay:up">
+    <header data-role="header">
+        <div data-role="navbar">
+        	<!--<a data-role="backbutton" data-align="left" data-glyph-gray=","data-glyph-gray=",">Back</a>-->
+            <span data-role="view-title">Versions</span>
+            <a data-role="button" data-align="right" href="#bible" data-glyph-gray="F"></a>
+        </div>
+    </header>
+    <ul id="list-bible-versions"></ul>
+</div>
+
+<div data-role="view" id="bible-books" data-model="bible" data-init="bible.loadBooks" data-show="bible.showBooks" data-transition="overlay:up">
+    <header data-role="header">
+        <div id="book-select-title" data-role="navbar">
+            <!--<a data-role="backbutton" data-align="left" data-glyph-gray=","data-glyph-gray=",">Back</a>-->
+            <span data-role="view-title">title</span>
+            <a data-role="button" data-align="right" href="#bible" data-glyph-gray="F"></a>
+        </div>
+    </header>
+	<ul id="bible-ref-buttons" data-role="buttongroup" data-select="bible.btnBookChapterSelect" data-index="0" style="margin:10px auto 5px auto;">
+		<li>Book</li>
+		<li>Chapter</li>
+	</ul>
+	<div id="div-bible-books" style="position:absolute;width:100%;box-sizing:border-box;"><ul id="list-bible-books" style="margin-top:5px;"></ul></div>
+	<div id="div-bible-chapters">
+		<table id="chapterlist" style="width:100%;margin-top:5px;"></table>
+	</div>
+</div>
+
+
+<!-- HOME -->
+<div data-role="view" id="home" data-title="Welcome" data-model="bible" data-init="baja.initHome" data-show="baja.showHome">
+	<header data-role="header">
+		<div data-role="navbar" style="background-color:#eee;">
+			<a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$"></a>
+			<span data-role="view-title"></span>
+		</div>
+	</header>
+	<div id="home-inner">
+		<div id="div-home"></div>
+		
+		<div style="margin:0 auto;width:100%;text-align:center;">
+			<button class="baja-button-tiny" style="width:140px;margin-right:0;" data-glyph-smaller="T" onclick="baja.shareFromMenu('facebook')" ref="config.facebook.url">&nbsp;&nbsp;Share on Facebook</button>
+			<button class="baja-button-tiny" style="width:140px;margin-right:0;" data-glyph-smaller="R" onclick="baja.shareFromMenu('twitter')" ref="config.twitter.url">&nbsp;&nbsp;Share on Twitter</button>
+		</div>
+		<br/><br/>
+	</div>
+</div>
+
+
+<!-- CALENDAR -->
+<div data-role="view" id="events" data-model="calendar" data-title="Events" data-show="calendar.showEvents">
+	<header data-role="header">
+        <div id="navbar-calendar" data-role="navbar">
+			<a data-role="backbutton" data-align="left"data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div id="events-html" style="padding:10px;">
+    
+    </div>
+</div>
+
+
+<!-- MEDIA -->
+<div data-role="view" id="media-categories" data-init="media.initMediaCategoriesView" data-show="media.showMediaCategoriesView" data-before-show="media.beforeShowMediaCategoriesView">
+    <header data-role="header">
+        <div id="navbar-mediacategories" data-role="navbar">
+			<a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+            <span data-role="view-title">Media Categories</span>
+        </div>
+    </header>
+	<ul id="list-mediacategories"></ul>
+</div>
+
+<div data-role="view" id="mediafeed" data-model="media" data-init="media.initMediaFeedView" data-before-show="media.beforeShowMediaFeedView" data-show="media.showMediaFeedView">
+    <header data-role="header">
+        <div id="navbar-mediafeed" data-role="navbar">
+        	<a id="button-home-mediafeed" data-role="button" data-bind="invisible:hasCategory" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+			<a id="button-back-mediafeed" data-role="button" data-bind="visible:hasCategory" data-click="media.backMediaCategories" data-align="left" data-glyph-gray="," class="fakeback">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div class="page-title" data-bind="visible:hasCategory, text:currentCategory.text"></div>
+	<ul id="list-mediafeed"></ul>
+</div>
+
+<div data-role="view" id="mediaitem" data-model="media" data-init="media.initMediaItemView" data-before-show="media.beforeMediaItemView" data-show="media.showMediaItemView" data-hide="media.hideMediaItemView">
+	<header data-role="header">
+        <div id="navbar-mediaitem" data-role="navbar">
+			<a data-role="button" data-click="media.backMediaFeed" data-align="left"data-glyph-gray="," class="fakeback">Back</a>
+            <span data-role="view-title"></span>
+            <a data-role="button" data-click="media.share" data-align="right" data-glyph-gray="1"></a>
+        </div>
+    </header>
+    <div id="div-media-detail-scroller" data-role="scroller">
+		<div id="div-media-item-custom" style="display:none;">custom</div>
+		<div id="div-media-item-view">
+			<div class="page-title media" data-bind="text:currentItem.displayDate,visible:hasDisplayDate"></div>
+			<div class="media-item-detail">
+		
+				<div id="layout-thumb" data-bind="visible:hasThumbnail">
+					<div id="divMetadata">
+						<div class="media-title" data-bind="text:currentItem.title"></div>
+						<div class="media-author" data-bind="text:currentItem.author"></div>
+					</div>
+					<div id="divThumb" onclick="media.playItem()">
+						<img id="thumb-image" src="" />
+						<div id="divDescription" data-bind="text:itemDescription"></div>
+					</div>
+					<div id="divDescription2" data-bind="html:itemDescription"></div>
+				</div>
+			
+				<div id="layout-nothumb" data-bind="invisible:hasThumbnail" style="text-align:center;">
+					<div class="media-title" data-bind="text:currentItem.title"></div>
+					<div class="media-author" data-bind="text:currentItem.author"></div>
+					<div data-bind="text:itemDescription"></div>
+					<div id="div-content-html" data-bind="html:itemDescriptionHtml" style="text-align:left;"></div>
+				</div>
+			
+				<div id="divButtons">
+					<button id="btnMediaListen" data-bind="visible:hasAudio" onclick="media.playItem('audio')" class="baja-button-sm" data-glyph="!">&nbsp;&nbsp;Listen</button>
+					<button id="btnMediaWatch" data-bind="visible:hasVideo" onclick="media.playItem('video')" class="baja-button-sm" data-glyph="<">&nbsp;&nbsp;Watch</button>
+					<img id="media-icon-fb" onclick="media.shareFacebook()" src="https://dashboard.bibleandjournalapp.com/resources/css/fb-media.png" style="width:35px;height:35px;position:relative;top:13px;margin-left:1px"/>
+				
+					<div id="media-button-fb">
+						<div class="facebook-button" onclick="media.shareFacebook()">Share on
+							<br/><span class="bigtext">Facebook</span>
+						</div>
+						<div class="facebook-icon">T</div>
+					</div>
+				</div>
+			
+				<div id="media-item-text"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- MUSIC -->
+<div data-role="view" id="music-collections" data-model="music" data-init="music.initCollections" data-show="music.showCollections">
+	<header data-role="header">
+        <div id="navbar-music" data-role="navbar">
+			<a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+            <span data-role="view-title" data-bind="text:musicTitle"></span>
+        </div>
+    </header>
+	<div class="page-title" data-bind="text:collectionsTitle"></div>
+	<div id="div-music-collections" class="music"></div>
+</div>
+
+<div data-role="view" id="music-tracks" data-model="music" data-init="music.initTracks" data-show="music.showTracks">
+	<header data-role="header">
+        <div id="navbar-music" data-role="navbar">
+			<a data-role="button" href="#music-collections" data-align="left" data-glyph-gray="," class="fakeback">Back</a>
+            <span data-role="view-title" data-bind="text:musicTitle"></span>
+			<a data-role="button" data-click="music.share" data-align="right" data-glyph-gray="1"></a>
+        </div>
+    </header>
+	<div class="page-title" data-bind="text:releaseDate"></div>
+	<div id="div-music-tracks" class="music-detail">
+		<div class="music-title" data-bind="text:currentItem.title"></div>
+		<img class="art" data-bind="attr: { src: currentItem.imageLarge }"/>
+		<div id="music-buttons">
+			<div class="itunes-button" data-bind="attr: { ref: currentItem.url }">Download on
+				<br/><span class="bigtext">iTunes</span>
+			</div>
+			<div class="apple-icon">@</div>
+			<img onclick="music.shareFacebook()" src="https://dashboard.bibleandjournalapp.com/resources/css/fb-media.png" style="width:35px;height:35px;position:absolute;top:6px;right:0;"/>
+		</div>
+		<ul id="list-music-tracks"></ul>
+		<div class="music-copyright" data-bind="html:currentItem.copyright"></div>
+	</div>
+</div>
+
+
+<!-- JOURNAL -->
+<div data-role="view" id="journal" data-title="My Journals" data-model="journal" data-init="journal.initHome" data-show="journal.showHome" data-before-show="journal.returnToView">
+    <header data-role="header">
+        <div data-role="navbar">
+			<a data-role="button" data-align="left" data-click="baja.toggleMenu" data-glyph-gray="$">&nbsp;</a>
+            <span data-role="view-title"></span>
+            <a data-role="button" data-align="right" data-glyph-gray="H" data-bind="visible:isUserSignedIn" data-click="journal.addJournal"></a>
+        </div>
+    </header>
+
+    <div id="journal-home" data-bind="visible:isUserSignedIn">
+    	<div id="pagehint-journals" class="pagehint" data-bind="invisible:hasJournals">
+			Loading Journals...
+		</div>
+		<ul id="list-journals"></ul>
+	</div>
+
+	<div id="nologin" data-bind="invisible:isUserSignedIn" style="margin:0 auto;width:100%;text-align:center;">
+		<h3>You are not signed in.</h3>
+		<p style="line-height:16px;">Please sign in or create a free account to use the Journal functionality of this app.</p>
+		<div style="width:100%;margin:10px auto;text-align:center;">
+        	<button type="button" class="baja-button" onclick="baja.showSignIn()" data-glyph-small="V">&nbsp;&nbsp;SIGN IN</a></button>
+            <button type="button" class="baja-button" onclick="app.navigate('register')" data-glyph-small="H">&nbsp;&nbsp;New</button>
+			<div style="text-align:left;background-color:#eee;border:1px solid #ddd;font-size:8pt;margin:10px;">
+				<p>* The reason you need a user account is so your journal can be accessed anytime online at</p>
+				<p style="text-align:center;">www.PursueJournal.com</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div data-role="view" id="journal-entries" data-title="Journal" data-model="journal" data-init="journal.initJournalEntries" data-show="journal.showJournalEntries">
+	<header data-role="header">
+        <div id="navbar-entries" data-role="navbar">
+			<a data-role="button" href="#journal-redirect" data-align="left"data-glyph-gray="," class="fakeback">Back</a>
+            <span data-role="view-title"></span>
+
+            <a data-role="button" data-align="right" data-glyph-gray="H" data-click="journal.addEntry"></a>
+        </div>
+        <div class="page-title">
+    		<span data-bind="text:journal.Title"></span>
+    		<a data-role="button" data-align="right" data-glyph-nav="C" data-click="journal.editJournal"></a>
+    	</div>
+    </header>
+    <div id="journal-entries" data-bind="visible:isUserSignedIn">
+
+    	<div id="pagehint-journal-entries" class="pagehint" data-bind="invisible:hasEntries">
+			Loading...
+		</div>
+		<ul id="list-journal-entries"></ul>
+		<div id="journal-load-more" data-bind="visible:hasMorePages" style="box-sizing:border-box;width:100%;text-align:center;padding:5px;margin:0;">
+			<a data-click="journal.loadMoreEntries" data-role="button" style="width:90%;font-size:1.3em;">Load more...</a>
+		</div>
+		<br/><br/><br/>
+	</div>
+</div>
+
+<div data-role="view" id="journal-entry" data-title="Journal Entry" data-model="journal" data-init="journal.initJournalEntry" data-show="journal.showJournalEntry">
+	<header data-role="header">
+        <div id="navbar-entry" data-role="navbar">
+			<a data-role="button" href="#journal-entries" data-align="left"data-glyph-gray="," class="fakeback">Back</a>
+            <span data-role="view-title"></span>
+            <a data-role="button" data-click="journal.share" data-align="right" data-glyph-gray="1"></a>
+        </div>
+        <div class="page-title">
+    		<span data-bind="text:entry.Title"></span>
+    		<a data-role="button" data-align="right" data-glyph-nav="C" data-click="journal.editEntry"></a>
+    	</div>
+    </header>
+
+    <div id="journal-entry-detail" data-bind="visible:isUserSignedIn">
+		<h4 data-bind="text:entryDateFormatted"></h4>
+		<p class="entry" id="entry-content-default" data-bind="html:entryContent"></p>
+		<p class="entry" id="entry-content-custom"></p>
+		<br/><br/><br/>
+	</div>
+</div>
+
+<div data-role="view" id="journal-entry-edit" data-title="Edit Journal Entry" data-model="journal" data-init="journal.initJournalEntryEdit" data-show="journal.showJournalEntryEdit">
+	<header data-role="header">
+        <div id="navbar-entry-edit" data-role="navbar" style="font-size:.9em;">
+        	<div class="toolbar gradient">
+				<button class="km-button left" onclick="journal.saveEntry()" data-glyph-gray="#"></button>
+				<button class="km-button left" onclick="journal.cancelEditEntry()" data-glyph-gray="F"></button>
+				<button class="format-button km-button" ref="bold"><b>B</b></button>
+				<button class="format-button km-button" ref="italic"><i>i</i></button>
+				<button class="format-button km-button" ref="underline"><u>U</u></button>
+				<button class="format-button km-button" ref="insertUnorderedList" data-glyph-gray="7"></button>
+				<button class="format-button km-button" ref="insertOrderedList" data-glyph-gray="8"></button>
+				<button class="km-button" ontouchend="journal.deleteEntry()" data-glyph-gray="B"></button>
+    		</div>
+        </div>
+        <div id="journal-edit-custom-title" class="page-title" style="top:42px;">
+			<a data-role="button" data-bind="visible:isLeftNavEnabled" data-click="journal.navigatePart" rel="left" class="left" data-glyph-small=","></a>
+			<span data-bind="html:currentPartTitle" style="text-align:center;"></span>
+			<a data-role="button" data-bind="visible:isRightNavEnabled" data-click="journal.navigatePart" rel="right" class="right" data-glyph-small="."></a>
+		</div>
+    </header>
+    
+    <div id="journal-entry-detail" data-bind="visible:isUserSignedIn" style="position:relative;margin:42px auto 0 auto;padding:0;box-sizing:border-box;width:310px;">
+    	<input type="hidden" id="entry_id"/>
+    	
+    	<span class="entry-date-block" onclick="$('#entry-edit-date').focus()" style="position:absolute;right:-3px;top:5px;"><small data-bind="text:entryBlockMonth"></small><br/><span data-bind="text:entryBlockDay"></span></span>
+    	<input id="entry-edit-date" onblur="journal.updateEntryEditDate()" type="date" class="editable" style="position:absolute;top:-5000px;" />
+    	<input id="entry-edit-title" type="text" placeholder="New Entry" class="editable wide" style="margin:0 5px;border:none !important;border-bottom:1px solid #888 !important;font-weight:bold;background-color:#fff !important;box-shadow:none !important;background-image:none !important;"/>
+		
+		<div id="edit-scroller" style="box-sizing:border-box;height:330px;background-color:#fff;">
+            <div id="entry-edit-div" class="content-editable" contenteditable></div>
+        </div>
+	</div>
+</div>
+
+<div data-role="modalview" id="journal-edit" style="height:200px;width:90%;max-width:300px;">
+	<header data-role="header">
+        <div id="navbar-journal-edit" data-role="navbar">
+            <span data-role="view-title">Title</span>
+            <a data-role="button" data-click="closeModalView" data-align="right" data-glyph-gray="F"></a>
+        </div>
+    </header>
+	<div style="width:100%;max-width:300px;margin: 15px auto 10px auto;text-align:center;">
+		<input type="hidden" id="journal_id" />
+		<input type="text" id="journal_title" placeholder="Journal Title" class="editable" style="width:220px;margin-bottom:10px;"/>
+		<a data-role="button" data-click="journal.saveJournal" style="box-sizing:border-box;width:220px;font-size:1.2em;margin-top:10px;">Save Journal</a>
+		<a data-role="button" id="button-journal-delete" data-click="journal.deleteJournal" style="box-sizing:border-box;width:220px;font-size:1.2em;margin-top:10px;background-color:#a00;">Delete Journal</a>
+	</div>
+</div>
+
+<div data-role="view" id="journal-redirect" data-before-show="journal.beforeShowRedirect"></div>
+
+
+<!-- APP DIALOGS -->
+<div data-role="modalview" id="login" style="height:240px;width:90%;max-width:300px;">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="button" data-align="right" data-click="closeModalView" data-glyph-gray="F"></a>
+            <span data-role="view-title">Sign In</span>
+        </div>
+    </header>
+	<div id="form-login" style="width:100%;max-width:300px;margin: 15px auto 10px auto;text-align:center;">
+		<input type="email" id="login_username" placeholder="username or email" class="editable" style="width:220px;margin-bottom:10px;"/>
+		<input type="password" id="login_password" placeholder="password" class="editable" style="width:220px;margin-bottom:10px;"/>
+		<a data-role="button" data-click="baja.login" style="box-sizing:border-box;width:220px;font-size:1.2em;">Sign In</a>
+		<div style="margin-top:10px;font-size:12pt;"><a href="javascript:baja.showForgotPassword()">Forgot your password?</a></div>
+	</div>
+</div>
+
+<div data-role="modalview" id="forgotpassword" data-open="baja.openForgotPassword" style="height:200px;width:90%;max-width:300px;">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="button" data-align="right" data-click="closeModalView" data-glyph-gray="F"></a>
+            <span data-role="view-title">Forgot Password</span>
+        </div>
+    </header>
+    <div id="form-login" style="width:100%;max-width:300px;margin: 15px auto 10px auto;text-align:center;">
+		<input type="email" id="forgotpw_email" placeholder="username or email" class="editable" style="width:220px;margin-bottom:10px;"/>
+		<a data-role="button" data-click="baja.resetPassword" style="box-sizing:border-box;width:220px;font-size:1.2em;">Reset Password</a>
+	</div>
+</div>
+
+<div data-role="view" id="register" data-layout="notabs" data-model="baja" data-title="User Account" data-show="baja.showRegisterUser">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="backbutton" data-align="left"data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div id="register-form">
+    	<div><input id="register_username" type="text" placeholder="username" class="editable" onblur="baja.validateField(this)" /></div>
+    	<div><input id="register_email" type="email" placeholder="email" class="editable" onblur="baja.validateField(this)" /></div>
+    	<div><input id="register_password" type="password" placeholder="password" class="editable" onblur="baja.validateField(this)" /></div>
+    	<div><input id="register_password2" type="password" placeholder="confirm password" class="editable" onblur="baja.validateField(this)" /></div>
+    	<a id="button-register" data-role="button" data-click="baja.registerUser" class="disabled" style="box-sizing:border-box;width:100%;font-size:1.2em;">Register</a>
+    	<div id="hintCreateAccount" class="hint" style="margin-top:6px;">By creating an account you are agreeing to our <a href="javascript:void(null)" class="button-external-url" data-url="Terms">Terms of Service</a> and confirming that you are at least 13 years old.</div>
+    	<div id="hintCreateAccount" class="hint" style="margin-top:6px;">Leave password fields blank unless you wish to change your password.</div>
+    </div>
+</div>
+
+<div data-role="view" id="settings" data-title="Settings" data-show="baja.showSettings" data-init="baja.initSettings">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="backbutton" data-align="left"data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div>
+    	<div class="list-section">Bible Reading Options</div>
+    	<ul data-role="listview" data-style="inset">
+    		<li>
+    			<a id="s-font" href="#settings-font" class="settings-value"></a>
+    		</li>
+    		<li>
+    			<a id="s-font-size" href="#settings-font-size" class="settings-value"></a>
+    		</li>
+    		<li>
+    		    Low Light
+    		    <input data-role="switch" id="s-lowlight" data-change="baja.saveSettings"/>
+    		</li>
+    	</ul>
+    </div>
+</div>
+
+<div data-role="view" id="settings-font" data-title="Select Font" data-show="baja.showFont">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="backbutton" data-align="left" data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <ul id="list-font" data-role="listview" data-style="inset">
+    	<li ref="1" ontouchend="$(this).addClass('selected');baja.saveSettings('font', '1', this);" class="text-font1">Helvetica Neue</li>
+    	<li ref="2" ontouchend="$(this).addClass('selected');baja.saveSettings('font', '2', this);" class="text-font2">Georgia</li>
+    	<li ref="3" ontouchend="$(this).addClass('selected');baja.saveSettings('font', '3', this);" class="text-font3">Trebuchet MS</li>
+    	<li ref="4" ontouchend="$(this).addClass('selected');baja.saveSettings('font', '4', this);" class="text-font4">Palatino</li>
+    </ul>
+</div>
+
+<div data-role="view" id="settings-font-size" data-title="Select Font Size" data-show="baja.showFontSize">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="backbutton" data-align="left" data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <ul id="list-font-size" data-role="listview" data-style="inset">
+    	<li ref="Small" ontouchend="$(this).addClass('selected');baja.saveSettings('fontSize', 'Small', this);" class="text-small">Small</li>
+    	<li ref="Medium" ontouchend="$(this).addClass('selected');baja.saveSettings('fontSize', 'Medium', this);" class="text-medium">Medium</li>
+    	<li ref="Large" ontouchend="$(this).addClass('selected');baja.saveSettings('fontSize', 'Large', this);" class="text-large">Large</li>
+    	<li ref="Huge" ontouchend="$(this).addClass('selected');baja.saveSettings('fontSize', 'Huge', this);" class="text-huge">Huge</li>
+    </ul>
+</div>
+
+<div data-role="modalview" id="video-player" style="width:100%;height:275px;">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="button" data-align="right" data-click="closeModalView" data-glyph-gray="F"></a>
+            <span data-role="view-title">Live Video</span>
+        </div>
+    </header>
+    <div id="video-attach"></div>
+</div>
+
+<div data-role="view" id="front-login" data-layout="notabs" data-title="Welcome" data-init="baja.initFrontLogin" data-show="baja.showFrontLogin">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+
+	<div id="home-front-login" style="margin:0 auto;width:100%;text-align:center;opacity:0;">
+		<br/>
+		<p style="line-height:16px;">
+			<strong>Please sign in or create a free account to use this application.</strong>
+			
+		</p>
+		<div style="width:100%;margin:10px auto;text-align:center;">
+        	<button type="button" class="baja-button" onclick="baja.showSignIn()" data-glyph-small="V">&nbsp;&nbsp;SIGN IN</a></button>
+            <button type="button" class="baja-button" onclick="app.navigate('register')" data-glyph-small="H">&nbsp;&nbsp;New</button>
+		</div>
+		<div style="text-align:left;background-color:#eee;border:1px solid #ddd;font-size:8pt;margin:0 10px;">
+			<p>* The reason you need a user account is so your journal can be accessed anytime online at</p>
+			<p style="text-align:center;"><a href="javascript:baja.loadUrl('https://www.pursuejournal.com/')">www.PursueJournal.com</a></p>
+			<p>** This app includes 15 bible versions, cloud-based journal and much more, with no advertising!</p>
+		</div>
+	</div>
+</div>
+
+
+<!-- ****** TEMPLATES ****** -->
+<script type="text/x-kendo-template" id="template-media-feed-item">
+	<a class="media-item media-${type}">
+		<div style="display:table;">
+			<div style="display:table-row;">
+				<div style="display:table-cell;vertical-align:middle;position:relative;top:4px;">
+					<span class="entry-date-block"><small>#=media.getDatePart(date, 'MMM')#</small><br/>#=media.getDatePart(date,'dd')#</span>
+				</div>
+				<div style="display:table-cell;vertical-align:middle;padding-left:8px;padding-right:12px;">
+					<span class="heading">${title}</span>
+					<div class="details">${author}</div>
+				</div>
+			</div>
+		</div>
+	</a>
+</script>
+<script type="text/x-kendo-template" id="template-media-category">
+	<a class="media-category">${text}</a>
+</script>
+<script type="text/x-kendo-template" id="template-bible-book">
+	<a>${Name}</a>
+</script>
+<script type="text/x-kendo-template" id="template-bible-version">
+	<a href="bible" class="bible-version"><strong>${id}</strong>&nbsp;&nbsp;${name}</a>
+</script>
+<script type="text/x-kendo-template" id="template-bible-plan-passage">
+	<a>${Index} - ${Title}</a>
+</script>
+<script type="text/x-kendo-template" id="template-journal">
+	<a data-glyph-gray="# if(CustomJournalId == null) {#J#} else {#K#}#">&nbsp;&nbsp;${Title}</a>
+</script>
+<script type="text/x-kendo-template" id="template-journal-entry">
+	<a class="entry-list-item"><span class="entry-date-block"><small>#=journal.getEntryDatePart(EntryDate, 'MMM')#</small><br/>#=journal.getEntryDatePart(EntryDate,'dd')#</span><span class="entry-title">${Title}</span></a>
+</script>
+<script type="text/x-kendo-template" id="template-widget-media">
+	<div><strong>#=title#</strong></div>
+	<div>#=displayDate#</div>
+</script>
+<script type="text/x-kendo-template" id="template-home-logo">
+	<div id="divLogo" class="logo"><img src="#= data #" /></div>
+</script>
+<script type="text/x-kendo-template" id="template-home-reading-plan">
+	<div class="widget-outer">
+		<div class="reading-plan">
+			<div style="display:table-row;">
+				<div style="display:table-cell;vertical-align:middle;text-align:left;padding-left:4px;position:relative;top:-4px;">
+					<div class="reading-plan-title">Today's Bible Reading</div>
+					<div class="reading-plan-date"><span>#= kendo.toString(data, "dddd, MMM dd")#</span></div>
+				</div>
+				<div style="display:table-cell;vertical-align:middle;text-align:right;">
+				   <button ontouchend="location.hash='bible-plan'" class="baja-button-alt" data-glyph-gray-small="K"></span>&nbsp;&nbsp;READ</button><br/>
+				   <button ontouchend="location.hash='bible-plan';bible.playPlanAudio()" class="baja-button-alt" data-glyph-gray-small="!" style="margin-top:8px;">&nbsp;&nbsp;LISTEN</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/x-kendo-template" id="template-home-widget-small">
+	<div class="widget-container-cell" data-onclick="#=click#" data-tab="#=tab#" data-glyph-widget="#=icon#"><div>#=title#</div></div>
+</script>
+<script type="text/x-kendo-template" id="template-event">
+	<div class="calendar-event">
+		<div class="event-title">#=title#</div>
+		#if (thumbnail.length > 0) {#
+			<img src="#=thumbnail#" align="left" style="width:#if($.trim(when).length == 0 && $.trim(where).length == 0) {#300px#} else {#100px#}#;"/>
+		#}#
+		<div class="event-details">#if ($.trim(when).length > 0) {#<strong>When</strong><br/> #=when# #}#</div>
+		<div class="event-details">#if ($.trim(where).length > 0) {#<strong>Where</strong><br/> #=where# #}#</div>
+		#if ($.trim(description.length > 0)) {#
+			<div class="event-description" style="clear:both;">#=description#</div>
+		#}#
+	</div>
+</script>
+<script type="text/x-kendo-template" id="template-music-track">
+	<a class="div-music-track">#=trackNumber#&nbsp;&nbsp;#=trackName#</a>
+</script>

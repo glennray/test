@@ -1,0 +1,278 @@
+{
+	"authString": "Basic Z3BlaDpjNXRWZmN3NFQ1a3UyZDc4ZUZWVHRuM2h6Tkh6M2JkTDJCcXVGNzRW",
+    "authUrl": "https://dashboard.bibleandjournalapp.com/api/Users/Authenticate",
+    "registerUrl": "https://dashboard.bibleandjournalapp.com/api/Users",
+    "validateEmailUrl": "https://dashboard.bibleandjournalapp.com/api/Users/IsEmailInUse",
+    "resetPasswordUrl":"https://dashboard.bibleandjournalapp.com/api/Users/ResetPassword",
+    "ios": {
+    	"views": { "url":"platform/v1/views/iphone.html", "version":3 },
+    	"tabletViews": { "url":"platform/v1/views/ipad.html", "version":3 },
+    	"css": { "url":"platform/v1/css/iphone.css", "version":4 },
+    	"tabletCss": { "url":"platform/v1/css/ipad.css", "version":4 },
+    	"transition":"slide"
+    },
+    "android": {
+    	"views": { "url":"platform/v1/views/android.html", "version":5 },
+    	"tabletViews": { "url":"platform/v1/views/android.html", "version":5 },
+    	"css": { "url":"platform/v1/css/android.css", "version":6 },
+    	"tabletCss": { "url":"platform/v1/css/android.css", "version":6 },
+    	"transition":"fade"
+    },
+    "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=567268924",
+    "googlePlayUrl":"http://googleplayurl.com",
+    "analyticsId":"UA-31814203-2",
+    "bajaAppId":"GPEH",
+    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/gpeh",
+    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
+    "facebook": {
+    	"appId":"467376073321167", "url":"https://www.facebook.com/GPEH.Church"
+    },
+    "twitter": {
+    	"url":"https://twitter.com/GPEHchurch"
+    },
+    "menu": {
+        "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
+        "urlLearn":"http://bibleandjournalapp.com/support-videos/",
+        "urlSupport":"https://bibleandjournalapp.zendesk.com/anonymous_requests/new",
+        "urlBaja":"http://bibleandjournalapp.com/about/",
+        "urlPrivacy":"http://bibleandjournalapp.com/privacy-policy/",
+        "urlTerms":"http://bibleandjournalapp.com/terms-of-use/"
+    },
+	"events": [
+		{
+			"type":"app-init", "items": [  ]
+		},
+		{
+			"type":"media-feed-loaded", "items": [  ]
+		}
+	],
+	"modules": [
+		{ "id":"home", "version":3 },
+		{ "id":"baja", "version":4 },
+		{ "id":"audio", "version":3 },
+		{ "id":"bible", "version":6 },
+		{ "id":"journal", "version":3 },
+		{ "id":"media", "version":3 },
+		{ "id":"calendar", "version":3 },
+		{ "id":"utils", "version":3 }
+	],
+	"home":{
+		"widgets": [
+			{ "type":"logo" },
+			{ "type":"reading-plan" },
+			{ "type":"container", "widgets":[
+				{ "type":"media-small", "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
+				{ "type":"media-small", "title":"Sermons", "icon":"!", "tab":"tabMedia", "click":"app.navigate('media-categories?i=0','none')" },
+				{ "type":"events-small", "title":"Events", "icon":"+", "tab":"clear", "click":"app.navigate('events')" },
+				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrl(config.facebook.url)" },
+				{ "title":"Blog", "icon":":", "tab":"clear", "click":"app.navigate('media-categories?i=1', 'none')" },
+				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrl(config.twitter.url)" }
+			]}
+		]
+	},
+    "tabs": [
+        {
+            "id": "tabHome",
+            "view": "home",
+            "label": "Home",
+            "icon": "L",
+            "defaultTab": true
+        },
+        {
+            "id": "tabMedia",
+            "view": "media-categories?i=0",
+            "label": "Sermons",
+            "icon": "!",
+            "defaultTab": false
+        },
+		{
+            "id": "tabPlan",
+            "view": "bible-plan",
+            "label": "Plan",
+            "icon": "O",
+            "defaultTab": false
+        },
+        {
+            "id": "tabBible",
+            "view": "bible",
+            "label": "Bible",
+            "icon": "U",
+            "defaultTab": false,
+            "click": "bible.showTextView(null, false)"
+        },
+        {
+            "id": "tabJournal",
+            "view": "journal",
+            "label": "Journal",
+            "icon": "M",
+            "defaultTab": false
+        }
+    ],
+    "sharing": {
+    	"sentByText": "Sent by Grace Point at Eagle Heights Bible and Journal App.",
+    	"sentByHtml": " Sent by <a href='{storeUrl}'>Grace Point at Eagle Heights Bible and Journal App</a>.",
+    	"sentByTwitter": "via @GPEHchurch",
+		"facebook": {
+			"title": "Grace Point at Eagle Heights",
+			"shareUrl":"http://www.gpehchurch.com",
+			"shareText":"Grace Point at Eagle Heights Church in Orange, TX. Making Disciples who think and act like Jesus."
+		},
+		"twitter": {
+			"shareUrl":"http://twitter.com/GPEHchurch",
+			"shareText":""
+		},
+		"email": {
+			"shareSubject":"Check out my Bible and Journal App from Grace Point At Eagle Heights",
+			"shareBody":"I am using Grace Point at Eagle Heights Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
+		}
+	},
+	"calendar": {
+		"feedUrl":"http://www.gpehchurch.com/category/events/feed/", "type":"rss"
+	},
+    "bible": {
+        "urlBooks": "https://dashboard.bibleandjournalapp.com/api/books",
+        "urlChapter": "https://dashboard.bibleandjournalapp.com/api/chapters?version={0}&bookId={1}&chapter={2}&format={3}",
+        "urlAudio": "https://dashboard.bibleandjournalapp.com/api/Chapters/GetAudio?version={0}&query={1}",
+        "versions": [
+            {
+                "name": "Amplified Bible",
+                "id": "AMP",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Beibl Cymraeg Newydd 2004",
+				"id": "BCN",
+				"audio": false,
+                "format":"text"
+			},
+			{
+				"name": "beibl.net Testament Newydd 2011",
+				"id": "BNET",
+				"audio": false,
+                "format":"text"
+			},
+            {
+    			"name": "Beibl William Morgan 1620",
+				"id": "BWM",
+				"audio": false,
+                "format":"text"
+			},
+            {
+                "name": "Contemporary English Version",
+                "id": "CEV",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "English Standard Version",
+                "id": "ESV",
+                "audio": true,
+                "format":"html"
+            },
+            {
+                "name": "Good News Bible, Anglicised Version",
+                "id": "GNB",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "Good News Translation",
+                "id": "GNT",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, British 1769 Edition",
+                "id": "KJV",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, American 1867 Edition",
+                "id": "KJVA",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "New American Standard Bible",
+                "id": "NASB",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "Eadar-theangachadh Ur",
+                "id": "NGT",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Versión Reina-Valera 1960",
+				"id": "RVR60",
+				"audio": false,
+                "format":"text"
+			}
+        ],
+        "plans": [
+            {
+                "name": "Pursue God Reading Plan",
+                "url": "plans/pursuegod.json"
+            }
+        ],
+        "selectedPlan": {
+            "name": "Pursue God Reading Plan",
+            "url": "/reading-plans/pursuegod.json",
+            "startMonthDay": "1/1"
+        }
+    },
+    "journal": {
+        "urlJournals": "https://dashboard.bibleandjournalapp.com/api/Journals/ByUser/{id}",
+        "urlEntries": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/ByJournalPaged/{id}?page={p}&size={s}",
+        "urlSaveJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlDeleteJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlSaveEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}",
+        "urlDeleteEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}"
+    },
+    "media": [
+        {
+			"index":0,
+            "id": "sermons",
+            "title": "Sermons",
+            "type": "rss",
+            "url": {
+				"android": "http://www.gpehchurch.com/sermons/feed/",
+				"ipad": "http://www.gpehchurch.com/sermons/feed/",
+				"iphone": "http://www.gpehchurch.com/sermons/feed/"
+			},
+            "itemType": "audio",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"author" },
+				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
+				"length": { "method":"find", "node":"duration" }
+			}
+        },
+		{
+			"index":1,
+            "id": "blog",
+            "title": "Blog",
+            "type": "rss",
+            "wifiOnly":false,
+            "url": {
+				"android": "http://www.gpehchurch.com/feed/",
+				"iphone": "http://www.gpehchurch.com/feed/",
+				"ipad": "http://www.gpehchurch.com/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        }
+    ]
+}

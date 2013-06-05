@@ -1,0 +1,312 @@
+{
+	"authString": "Basic Y290cjpQS1dsVE5Xc0FrcGZGQlBCRGQzY2dTYWhvTEpLNXNFa1JoVDRMZFJW",
+    "authUrl": "https://dashboard.bibleandjournalapp.com/api/Users/Authenticate",
+    "registerUrl": "https://dashboard.bibleandjournalapp.com/api/Users",
+    "validateEmailUrl": "https://dashboard.bibleandjournalapp.com/api/Users/IsEmailInUse",
+    "resetPasswordUrl":"https://dashboard.bibleandjournalapp.com/api/Users/ResetPassword",
+    "ios": {
+    	"views": { "url":"platform/v1/views/iphone.html", "version":4 },
+    	"tabletViews": { "url":"platform/v1/views/ipad.html", "version":4 },
+    	"css": { "url":"platform/v1/css/iphone.css", "version":5 },
+    	"tabletCss": { "url":"platform/v1/css/ipad.css", "version":5 },
+    	"transition":"slide"
+    },
+    "android": {
+    	"views": { "url":"platform/v1/views/android.html", "version":3 },
+    	"tabletViews": { "url":"platform/v1/views/android.html", "version":3 },
+    	"css": { "url":"platform/v1/css/android.css", "version":4 },
+    	"tabletCss": { "url":"platform/v1/css/android.css", "version":4 },
+    	"transition":"fade"
+    },
+    "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=572227607",
+    "googlePlayUrl":"http://googleplayurl.com",
+    "analyticsId":"UA-31814203-3",
+    "bajaAppId":"COTR",
+    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/cotr",
+    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
+    "facebook": {
+    	"appId":"254723801316215", "url":"https://www.facebook.com/COTRedeemer"
+    },
+    "twitter": {
+    	"url":"http://twitter.com/church_redeemer"
+    },
+    "menu": {
+        "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
+        "urlLearn":"http://bibleandjournalapp.com/support-videos/",
+        "urlSupport":"https://bibleandjournalapp.zendesk.com/anonymous_requests/new",
+        "urlBaja":"http://bibleandjournalapp.com/about/",
+        "urlPrivacy":"http://bibleandjournalapp.com/privacy-policy/",
+        "urlTerms":"http://bibleandjournalapp.com/terms-of-use/"
+    },
+	"events": [
+		{
+			"type":"app-init", "items": [  ]
+		},
+		{
+			"type":"media-feed-loaded", "items": [  ]
+		}
+	],
+	"modules": [
+		{ "id":"home", "version":3 },
+		{ "id":"baja", "version":4 },
+		{ "id":"audio", "version":3 },
+		{ "id":"bible", "version":6 },
+		{ "id":"journal", "version":3 },
+		{ "id":"media", "version":8 },
+		{ "id":"calendar", "version":3 },
+		{ "id":"utils", "version":3 }
+	],
+	"home":{
+		"widgets": [
+			{ "type":"logo" },
+			{ "type":"reading-plan" },
+			{ "type":"container", "widgets":[
+				{ "type":"media-small", "title":"Live", "icon":"=", "tab":"tabHome", "click":"media.playItem(null, 1)" },
+				{ "type":"media-small", "title":"Video", "icon":"N", "tab":"tabMedia", "click":"app.navigate('media-categories?i=0')" },
+				{ "type":"events-small", "title":"Events", "icon":"+", "tab":"clear", "click":"app.navigate('events')" }
+			]}
+		]
+	},
+    "tabs": [
+        {
+            "id": "tabHome",
+            "view": "home",
+            "label": "Home",
+            "icon": "L",
+            "defaultTab": true
+        },
+        {
+            "id": "tabMedia",
+            "view": "media-categories?i=0",
+            "label": "Video",
+            "icon": "N",
+            "defaultTab": false
+        },
+		{
+            "id": "tabPlan",
+            "view": "bible-plan",
+            "label": "Plan",
+            "icon": "O",
+            "defaultTab": false
+        },
+        {
+            "id": "tabBible",
+            "view": "bible",
+            "label": "Bible",
+            "icon": "U",
+            "defaultTab": false,
+            "click": "bible.showTextView(null, false)"
+        },
+        {
+            "id": "tabJournal",
+            "view": "journal",
+            "label": "Journal",
+            "icon": "M",
+            "defaultTab": false
+        }
+    ],
+    "sharing": {
+    	"sentByText": "Sent by Church of the Redeemer Bible and Journal App.",
+    	"sentByHtml": " Sent by <a href='{storeUrl}'>Church of the Redeemer Bible and Journal App</a>.",
+    	"sentByTwitter": "via @church_redeemer",
+		"facebook": {
+			"title": "Church of the Redeemer",
+			"shareUrl":"http://www.church-redeemer.org",
+			"shareText":"Church of the Redeemer in Gaithersburg, Maryland.  One Church, Multiple Campuses, United in Vision."
+		},
+		"twitter": {
+			"shareUrl":"@church_redeemer",
+			"shareText":""
+		},
+		"email": {
+			"shareSubject":"Check out my Bible and Journal App from Church of the Redeemer",
+			"shareBody":"I am using Church of the Redeemer Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
+		}
+	},
+	"calendar": {
+		"feedUrl":"http://www.church-redeemer.org/modules/events/views/ajax.php", "type":"html", "imgRoot":"http://www.church-redeemer.org/"
+	},
+    "bible": {
+        "urlBooks": "https://dashboard.bibleandjournalapp.com/api/books",
+        "urlChapter": "https://dashboard.bibleandjournalapp.com/api/chapters?version={0}&bookId={1}&chapter={2}&format={3}",
+        "urlAudio": "https://dashboard.bibleandjournalapp.com/api/Chapters/GetAudio?version={0}&query={1}",
+        "versions": [
+            {
+                "name": "Amplified Bible",
+                "id": "AMP",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Beibl Cymraeg Newydd 2004",
+				"id": "BCN",
+				"audio": false,
+                "format":"text"
+			},
+			{
+				"name": "beibl.net Testament Newydd 2011",
+				"id": "BNET",
+				"audio": false,
+                "format":"text"
+			},
+            {
+    			"name": "Beibl William Morgan 1620",
+				"id": "BWM",
+				"audio": false,
+                "format":"text"
+			},
+            {
+                "name": "Contemporary English Version",
+                "id": "CEV",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "English Standard Version",
+                "id": "ESV",
+                "audio": true,
+                "format":"html"
+            },
+            {
+                "name": "Good News Bible, Anglicised Version",
+                "id": "GNB",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "Good News Translation",
+                "id": "GNT",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, British 1769 Edition",
+                "id": "KJV",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "King James Version, American 1867 Edition",
+                "id": "KJVA",
+                "audio": false,
+                "format":"text"
+            },
+            {
+                "name": "New American Standard Bible",
+                "id": "NASB",
+                "audio": false,
+                "format":"html"
+            },
+            {
+                "name": "Eadar-theangachadh Ur",
+                "id": "NGT",
+                "audio": false,
+                "format":"text"
+            },
+			{
+				"name": "Versión Reina-Valera 1960",
+				"id": "RVR60",
+				"audio": false,
+                "format":"text"
+			}
+        ],
+        "plans": [
+            {
+                "name": "Pursue God Reading Plan",
+                "url": "/reading-plans/pursuegod.json"
+            },
+            {
+                "name": "Life Journal Reading Plan",
+                "url": "/reading-plans/pursuegod.json"
+            }
+        ],
+        "selectedPlan": {
+            "name": "Pursue God Reading Plan",
+            "url": "/reading-plans/pursuegod.json",
+            "startMonthDay": "1/1"
+        }
+    },
+    "journal": {
+        "urlJournals": "https://dashboard.bibleandjournalapp.com/api/Journals/ByUser/{id}",
+        "urlEntries": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/ByJournalPaged/{id}?page={p}&size={s}",
+        "urlSaveJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlDeleteJournal": "https://dashboard.bibleandjournalapp.com/api/Journals/{id}",
+        "urlSaveEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}",
+        "urlDeleteEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}",
+        "custom":[
+        	{ 
+        		"id":"cotrdevo",
+        		"title":"Daily Devotional Guide",
+        		"parts": [
+        			{ "index":0, "title":"What?", "text":"What does this passage say?" },
+        			{ "index":1, "title":"So What?", "text":"Why is this important to me?" },
+        			{ "index":2, "title":"Now What?", "text":"How do I apply it to my life?" },
+        			{ "index":3, "title":"But...", "text":"What is in the way of me applying this?" }
+        		]
+        	}
+        ]
+    },
+    "media": [
+        {
+			"index":0,
+            "id": "ondemand",
+            "title": "Video On Demand",
+            "type": "rss",
+            "wifiOnly":true,
+            "url": {
+				"android": "http://api.multicastmedia.com/ws/get_rss/p_covwfcnx/thumbs_true/allfiles_true/download_true/lang_en-us/icategory_Business/covwfcnx.xml",
+				"iphone": "http://api.multicastmedia.com/ws/get_rss/p_covwfcnx/thumbs_true/allfiles_true/download_true/lang_en-us/icategory_Business/covwfcnx.xml",
+				"ipad": "http://api.multicastmedia.com/ws/get_rss/p_r5c486o8/thumbs_true/allfiles_true/download_true/lang_en-us/icategory_Business/r5c486o8.xml"
+			},
+            "itemType": "video",
+			"categories": { "xmlpath":"channel > category", "method":"text" },
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"category": { "method":"child", "node":"category" },
+				"author": { "method": "find", "node":"author" },
+				"urlVideo": { 
+					"method": "find", 
+					"node": {
+						"iphone":"iPhone",
+						"ipad":"iPad",
+						"android":"iPadAkamai"
+					}
+				},
+				"length": { "method":"find", "node":"duration" },
+				"thumbnail": { "method":"find", "node":"thumbnail", "attribute":"url" },
+				"description": { "method":"child", "node":"description" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":1,
+            "id": "live",
+            "title": "Live Service",
+            "type": "live",
+            "wifiOnly":true,
+            "statusx": {
+            	"url":"https://player.multicastmedia.com/ws/get_live_player_info/e_fg4pyx7w",
+            	"remainingTime": { "method":"find", "node":"live_event > time_remaining" },
+            	"displayText": { "method":"find", "node":"live_event > title" }
+            },
+            "schedule": { 
+            	"timezone":-5, 
+            	"events":[
+					{ "dayOfWeek":0, "startTime":"9:00", "endTime":"10:30" },
+					{ "dayOfWeek":0, "startTime":"11:00", "endTime":"12:30" },
+					{ "dayOfWeek":0, "startTime":"13:00", "endTime":"14:30" },
+					{ "dayOfWeek":3, "startTime":"19:15", "endTime":"20:45" },
+					{ "dayOfWeek":6, "startTime":"18:30", "endTime":"20:00" }
+				]
+			},
+            "url": {
+				"android": "http://kitdigitalhdios-f.akamaihd.net/i/COTRENG_iOS@85295/master.m3u8",
+				"ipad": "http://kitdigitalhdios-f.akamaihd.net/i/COTRENG_iOS@85295/master.m3u8",
+				"iphone": "http://kitdigitalhdios-f.akamaihd.net/i/COTRENG_iOS@85295/master.m3u8"
+			},
+            "itemType": "live"
+        }
+    ]
+}

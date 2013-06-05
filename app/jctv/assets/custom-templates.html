@@ -1,0 +1,24 @@
+<script type="text/x-kendo-template" id="template-jctv-live">
+    <div class="widget-outer">
+        <div id="divJctvLiveFeed" class="widget-inner">
+			<div id="divJctvTitleBar">Now Playing</div>
+			<div id="jctv-live">
+				<img id="feedImage" style="" onclick="custom.playLiveFeed()" align="left" />
+				<div id="feedTitle"></div>
+				<button onclick="custom.playLiveFeed()" class="baja-button-sm" data-glyph="<">Watch</button>
+				<div id="feedDesc"></div>
+			    <div id="feedUpNext"></div>
+			</div>
+		
+        </div>
+    </div>
+</script>
+
+<style>
+	#divJctvLiveFeed { padding:10px;border:1px solid #ddd;box-sizing:border-box; }
+	#divJctvTitleBar { background-color:#888;color:#fff;padding:5px;font-weight:bold;font-size:11pt;margin:-10px -10px 10px -10px;text-align:center; }
+	#jctv-live #feedTitle { font-weight:bold; }
+	#jctv-live #feedImage { max-width:120px;margin-right:10px;margin-bottom:10px; }
+	#jctv-live #feedDesc { font-size:9pt;margin-top:5px; }
+	#jctv-live #feedUpNext { font-size:9pt;clear:both;display:none; }
+</style>

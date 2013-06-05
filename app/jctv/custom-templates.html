@@ -1,0 +1,130 @@
+<script type="text/x-kendo-template" id="template-jctv-live">
+	<div id="divJctvLiveFeed">
+		<div id="divJctvTitleBar">Now Playing: <span id="feedTitle"></span></div>
+		<div id="jctv-live">
+			<div id="feedImageBox"><img id="feedImage" onclick="custom.playLiveFeed()" align="left" /></div>
+			<div>
+				<div id="feedDesc"></div>
+				<button id="buttonLiveWatch" onclick="custom.playLiveFeed()" class="baja-button-alt" data-glyph-gray="<">&nbsp;&nbsp;Watch</button>
+				
+			</div>
+			<div id="feedUpNext"></div>
+		</div>
+	</div>
+</script>
+
+<script type="text/x-kendo-template" id="template-jctv-video-item">
+	<a class="jctv-item">
+		<div class="jctv-row">
+			<div class="jctv-thumb">
+				<img src="#=thumbnail#"/>
+			</div>
+			<div class="jctv-text">
+				<span class="jctv-title">#=title#</span>
+				<div class="jctv-descr">#=description#</div>
+				<div class="jctv-descr">#=displayDate#</div>
+			</div>
+		</div>
+	</a>
+</script>
+
+<script type="text/x-kendo-template" id="template-jctv-video-detail">
+	<div class="page-title">#=displayDate#</div>
+	<div id="jctvDetail" class="media-item-detail">
+		<div class="media-title">#=description#</div>
+		<div style="position:relative;width:200px;margin:5px auto;">
+			<img id="jctv-detail-thumb" src="#=thumbnail#"/>
+			<div id="imgVideoLoader" style="position:absolute;top:55px;left:79px;opacity:.5;">
+				<img src="https://dashboard.bibleandjournalapp.com/resourceslive/app/jctv/assets/ajax-loader.gif" />
+			</div>
+			<div id="imgVideoPlay" style="position:absolute;top:51px;left:76px;opacity:1;display:none;">
+				<img src="https://dashboard.bibleandjournalapp.com/resourceslive/app/jctv/assets/video-play.png" />
+			</div>
+			<div id="jctvVideoPlayer"></div>
+		</div>
+		<div id="jctv-detail-text">#=content#</div>
+		<div id="media-button-fb" style="display:block;">
+			<div class="facebook-button" onclick="media.shareFacebook()">Share on
+				<br/><span class="bigtext">Facebook</span>
+			</div>
+			<div class="facebook-icon">T</div>
+		</div>
+	</div>
+		
+	<div id="jctv-episodes">More From <strong>#=title#</strong></div>
+	<div id="jctv-list-episodes"></div>
+</script>
+
+<div data-role="modalview" id="jctv-video-quality" style="height:300px;width:90%;max-width:300px;">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<span data-role="view-title">Video Quality</span>
+        </div>
+    </header>
+	<div style="width:100%;max-width:280px;margin: 15px auto 10px auto;text-align:center;">
+		<div style="padding:0 5px;font-size:9pt;">
+			Select a video playback quality setting.<br/>If you are having trouble playing videos, you can change
+			this setting from the app menu.
+		</div>
+		<ul id="jctv-list-quality" data-role="listview" data-style="inset">
+			<li ref="0" ontouchend="$(this).addClass('selected');custom.saveSettingsFirst('quality', '0', this);">Low</li>
+			<li ref="1" ontouchend="$(this).addClass('selected');custom.saveSettingsFirst('quality', '1', this);">Medium</li>
+			<li ref="2" ontouchend="$(this).addClass('selected');custom.saveSettingsFirst('quality', '2', this);">High</li>
+			<li ref="3" ontouchend="$(this).addClass('selected');custom.saveSettingsFirst('quality', '3', this);">Super</li>
+		</ul>
+	</div>
+</div>
+
+<div data-role="view" id="jctv-settings-video-quality" data-title="Playback Quality" data-show="custom.showQualitySettings">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a class="km-button" onclick="app.navigate('#:back')" data-align="left" data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <ul id="jctv-list-quality" data-role="listview" data-style="inset">
+    	<li ref="0" ontouchend="$(this).addClass('selected');custom.saveSettings('quality', '0', this);">Low</li>
+    	<li ref="1" ontouchend="$(this).addClass('selected');custom.saveSettings('quality', '1', this);">Medium</li>
+    	<li ref="2" ontouchend="$(this).addClass('selected');custom.saveSettings('quality', '2', this);">High</li>
+    	<li ref="3" ontouchend="$(this).addClass('selected');custom.saveSettings('quality', '3', this);">Super</li>
+    </ul>
+</div>
+
+<style>
+	#divJctvLiveFeed { font-size:1.2em;box-sizing:border-box;background-color:#fff; }
+	#divJctvLiveFeed #divJctvTitleBar { color:#717171;font-weight:bold;font-size:1.1em;text-align:left;margin:10px 10px 5px 10px; }
+	#divJctvLiveFeed #jctv-live { padding:0 10px 5px 10px; }
+	#divJctvLiveFeed #jctv-live #feedTitle { font-weight:bold;font-size:.9em; }
+	#divJctvLiveFeed #jctv-live #feedImageBox { min-height:70px;float:left;width:110px;margin-right:10px;margin-bottom:10px; }
+	#divJctvLiveFeed #jctv-live #feedImage { max-width:110px;box-shadow:1px 1px 2px #aaa; }
+	#divJctvLiveFeed #jctv-live #buttonLiveWatch { width: 120px;height:30px;display:inline-block;margin-top:5px; }
+	#divJctvLiveFeed #jctv-live #feedDesc { font-size:.8em;margin-top:5px;color:#717171; }
+	#divJctvLiveFeed #jctv-live #feedUpNext { font-size:.65em;margin-top:5px;color:#717171;clear:both; }
+	
+	#divJctvLiveFeed.tablet { font-size:1.8em;border:1px solid #ddd;box-sizing:border-box;background-color:#fff; }
+	#divJctvLiveFeed.tablet #divJctvTitleBar { background-color:#888;color:#fff;padding:2px !important;font-weight:bold;font-size:.9em;text-align:center; }
+	#divJctvLiveFeed.tablet #jctv-live { padding:10px; }
+	#divJctvLiveFeed.tablet #jctv-live #feedTitle { font-weight:bold;font-size:.9em; }
+	#divJctvLiveFeed.tablet #jctv-live #feedImageBox { min-height:160px;float:left;width:220px;margin-right:10px;margin-bottom:10px; }
+	#divJctvLiveFeed.tablet #jctv-live #feedImage { max-width:220px;box-shadow:1px 1px 2px #aaa; }
+	#divJctvLiveFeed.tablet #jctv-live #buttonLiveWatch { width: 150px;height:30px;display:inline-block;margin-top:5px;font-size:16pt;height:40px !important; }
+	#divJctvLiveFeed.tablet #jctv-live #feedDesc { font-size:.8em;margin-top:5px;color:#717171; }
+	#divJctvLiveFeed.tablet #jctv-live #feedUpNext { font-size:.8em;clear:both;display:block; }
+	
+	.jctv-item { display:table;margin:0;box-sizing:border-box;border-collapse:collapse; }
+	.jctv-row { display:table-row; }
+	.jctv-thumb { display:table-cell;vertical-align:middle; }
+	.jctv-thumb img { border:0;max-width:80px; }
+	.jctv-text { display:table-cell;vertical-align:middle;padding-left:8px;padding-right:12px;margin:0; }
+	.jctv-title { font-size:10pt;font-weight:bold;line-height:16px;text-align:left; }
+	.jctv-descr { font-size:8pt;line-height:14px;padding-top:3px; }
+	
+	#jctvDetail {  }
+	#jctvDetail .jctv-title { color:#717171;font-weight:bold;font-size:1.1em;text-align:left;margin:10px 10px 5px 10px; }
+	#jctvDetail #jctv-detail-thumb { width:200px;height:150px; }
+	#jctvDetail #jctv-detail-text { font-size:8pt;color:#333; }
+	#jctvDetail #jctvVideoPlayer { position:absolute;top:0;left:0; }
+	#jctv-episodes { margin-top:15px;padding:5px;color:#fff;background-color:#000;clear:both; }
+	
+	.km-ios #custom-tabstrip .km-state-active { background-color:#faaa2f;color:#fff; }
+</style>

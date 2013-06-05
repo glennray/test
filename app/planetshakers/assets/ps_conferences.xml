@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title></title>
+		<link></link>
+		<description></description>
+		<docs></docs>
+		<pubDate>Mon, 18 Mar 2013 04:51:00 GMT</pubDate>
+		<atom:link href="" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Beautiful Woman 2013</title>
+			<link>http://www.planetshakers.com/bw13/</link>
+			<guid>http://www.planetshakers.com/bw13</guid>
+			<pubDate>Tue, 2 Aug 2013 19:00:00 UTC</pubDate>
+			<description></description>
+		</item>
+		<item>
+			<title>Israel 2013</title>
+			<link>http://www.planetshakers.com/israel/</link>
+			<guid>http://www.planetshakers.com/israel</guid>
+			<pubDate>Sun, 25 Aug 2013 19:00:00 UTC</pubDate>
+			<description></description>
+		</item>
+		<item>
+			<title>Mighty Men 2013</title>
+			<link>http://www.planetshakers.com/mm2013/</link>
+			<guid>http://www.planetshakers.com/mm2013/</guid>
+			<pubDate>Fri, 18 Oct 2013 19:00:00 UTC</pubDate>
+			<description></description>
+		</item>
+		<item>
+			<title>Planetshakers Awakening 2014</title>
+			<link>http://www.planetshakers.com/awakening/</link>
+			<guid>http://www.planetshakers.com/awakening/</guid>
+			<pubDate>Mon, 14 Apr 2014 19:00:00 UTC</pubDate>
+			<description></description>
+		</item>
+	</channel>
+</rss>
