@@ -22,8 +22,6 @@
     "googlePlayUrl":"http://googleplayurl.com",
     "analyticsId":"UA-31814203-17",
     "bajaAppId":"aviator",
-    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/aviator",
-    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
     "facebook": {
     	"appId":"636476786381888", "url":"https://www.facebook.com/aviatorchurch"
     },

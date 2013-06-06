@@ -25,6 +25,7 @@ var baja = new kendo.data.ObservableObject({
 	deviceCountry: "",
 
 	init: function() {
+		config.appHttpRoot = resourceUrl + "app/" + config.bajaAppId;
 		if (localStorage.getObject("runOnce") == null) {
             localStorage.setObject("user", null);
             localStorage.setObject("runOnce", 1);
