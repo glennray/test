@@ -63,7 +63,7 @@
 			]}
 		]
 	},
-	"home_notused":{
+	"home_unused":{
 		"widgets": [
 			{ "type":"container", "widgets":[
 				{ "title":"What's Hot", "icon":"Y", "tab":"clear", "click":"alert('events')" },
