@@ -25,7 +25,7 @@ var baja = new kendo.data.ObservableObject({
 	deviceCountry: "",
 
 	init: function() {
-		config.appHttpRoot = resourceUrl + "app/" + config.bajaAppId;
+		config.appHttpRoot = resourceUrl + "app/" + clientId;
 		if (localStorage.getObject("runOnce") == null) {
             localStorage.setObject("user", null);
             localStorage.setObject("runOnce", 1);
@@ -648,7 +648,7 @@ var baja = new kendo.data.ObservableObject({
 				Username: $.trim($("#register_username").val()),
 				Password: $.trim($("#register_password").val()),
 				Email: $.trim($("#register_email").val()),
-				AppId: config.bajaAppId
+				AppId: clientId
 			};
 			$.ajax({
 				url: config.registerUrl,

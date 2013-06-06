@@ -21,7 +21,6 @@
     "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=657276046",
     "googlePlayUrl":"http://googleplayurl.com",
     "analyticsId":"UA-31814203-17",
-    "bajaAppId":"aviator",
     "facebook": {
     	"appId":"636476786381888", "url":"https://www.facebook.com/aviatorchurch"
     },
@@ -55,14 +54,20 @@
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
 				{ "title":"Messages", "icon":"2", "tab":"tabMedia", "click":"alert('messages')" },
-				{ "title":"What's Hot", "icon":"Y", "tab":"clear", "click":"alert('events')" },
 				{ "title":"Give", "icon":"X", "tab":"clear", "click":"baja.loadUrlNoLocation('https://app.easytithe.com/g/?uid=avia1134')" },
-				{ "title":"<span style='line-height:15px;'>Times &amp;<br/>Locations</span>", "icon":"5", "tab":"clear", "click":"alert('info')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
 				{ "title":"Instagram", "icon":"?", "tab":"clear", "click":"baja.loadUrlNative(config.instagram.url)" },
 				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
 				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
 				{ "title":"Journal", "icon":"M", "tab":"tabJournal", "click":"app.navigate('journal')" }
+			]}
+		]
+	},
+	"home_notused":{
+		"widgets": [
+			{ "type":"container", "widgets":[
+				{ "title":"What's Hot", "icon":"Y", "tab":"clear", "click":"alert('events')" },
+				{ "title":"<span style='line-height:15px;'>Times &amp;<br/>Locations</span>", "icon":"5", "tab":"clear", "click":"alert('info')" }
 			]}
 		]
 	},
