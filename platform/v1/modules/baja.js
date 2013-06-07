@@ -1362,15 +1362,6 @@ var baja = new kendo.data.ObservableObject({
 				}
 			);
 		}
-	},
-	
-	promptForLocation: function(callback) {
-		alert("Pick Location...");
-		var newLoc = { id:2, name:"Wellington", media:[2] };
-		baja.set("currentLocation", newLoc);
-		if (typeof callback == "function") {
-			callback(newLoc);
-		}
 	}
 	
 });
