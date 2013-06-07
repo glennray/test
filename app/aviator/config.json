@@ -53,7 +53,7 @@
 			{ "type":"logo" },
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
-				{ "title":"Messages", "icon":"2", "tab":"tabMedia", "click":"alert('messages')" },
+				{ "title":"Messages", "icon":"2", "tab":"tabMedia", "click":"media.navigateToFeed(0,'none')" },
 				{ "title":"Give", "icon":"X", "tab":"clear", "click":"baja.loadUrlNoLocation('https://app.easytithe.com/g/?uid=avia1134')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
 				{ "title":"Instagram", "icon":"?", "tab":"clear", "click":"baja.loadUrlNative(config.instagram.url)" },
@@ -82,8 +82,8 @@
 		{
             "id": "tabMedia",
             "view": "media-categories?i=0",
-            "label": "Podcast",
-            "icon": "!",
+            "label": "Messages",
+            "icon": "2",
             "defaultTab": false
         },
 		{
@@ -235,16 +235,61 @@
         "urlSaveEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}",
         "urlDeleteEntry": "https://dashboard.bibleandjournalapp.com/api/JournalEntries/{id}"
     },
+    "locations":[
+    	{ "id":0, "name":"Derby", "media":[0] },
+    	{ "id":1, "name":"North Wichita", "media":[1] },
+    	{ "id":2, "name":"Wellington", "media":[2] }
+    ],
     "media": [
-         {
+    	{
 			"index":0,
-            "id": "podcast",
-            "title": "Podcast",
+            "id": "podcast_derby",
+            "title": "Messages (Derby)",
             "type": "rss",
             "url": {
-				"android": "http://www.buzzsprout.com/10916.rss",
-				"ipad": "http://www.buzzsprout.com/10916.rss",
-				"iphone": "http://www.buzzsprout.com/10916.rss"
+				"android": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
+				"ipad": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
+				"iphone": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml"
+			},
+            "itemType": "audio",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"author" },
+				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
+				"length": { "method":"find", "node":"duration" }
+			}
+        },
+        {
+			"index":1,
+            "id": "podcast_north_wichita",
+            "title": "Messages (Wichita)",
+            "type": "rss",
+            "url": {
+				"android": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
+				"ipad": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
+				"iphone": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml"
+			},
+            "itemType": "audio",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"author" },
+				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
+				"length": { "method":"find", "node":"duration" }
+			}
+        },
+        {
+			"index":2,
+            "id": "podcast_wellington",
+            "title": "Messages (Wellington)",
+            "type": "rss",
+            "url": {
+				"android": "http://aviatorchurchwellington.podomatic.com/rss2.xml",
+				"ipad": "http://aviatorchurchwellington.podomatic.com/rss2.xml",
+				"iphone": "http://aviatorchurchwellington.podomatic.com/rss2.xml"
 			},
             "itemType": "audio",
 			"items": {

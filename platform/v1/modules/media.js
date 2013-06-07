@@ -123,6 +123,11 @@ var media = new kendo.data.ObservableObject({
 		}
 	},
 	
+	navigateToFeed: function(index, transition) {
+		media.set("currentMediaIndex", index);
+		app.navigate("media-categories?i=" + index, transition);
+	},
+	
 	initMediaCategoriesView: function(e) {
 		console.log("initMediaCategoriesView");
 		if ($("#list-mediacategories").data("kendoMobileListView") == null) {
@@ -150,13 +155,30 @@ var media = new kendo.data.ObservableObject({
 	beforeShowMediaCategoriesView: function(e) {
 		console.log("beforeShowMediaCategoriesView");
 		
+		if (config.locations != null && config.locations.length > 0) {
+			if (baja.get("currentLocation") == null) {
+				e.preventDefault();
+				app.navigate("home");
+				baja.showLocationPicker(function() {
+					app.navigate("media-categories?i=" + media.get("currentMediaIndex"), "none");
+				});
+				$("#custom-tabstrip").data("kendoMobileTabStrip").clear();
+			}
+		}
+		
 	},
 	
 	showMediaCategoriesView: function(e) {
 		console.log("showMediaCategoriesView");
 		baja.trackView("/mediacategories");
-		
+		var index = -1;
 		if (e.view.params["i"] != null) {
+			index = e.view.params["i"];
+			
+			if (config.locations != null && config.locations.length > 0) {
+				index = baja.get("currentLocation").media[index];
+			}
+			media.set("currentMediaIndex", index);
 			media.set("previousMediaIndex", media.get("currentMediaIndex"));
 			
 			// initialize loaded tracking
@@ -169,8 +191,8 @@ var media = new kendo.data.ObservableObject({
 				media.set("hasLoadedOnce", hasLoadedOnce);
 			}
 			
-			var index = e.view.params["i"];
 			media.set("currentMediaIndex", index);
+			
 			var mediaList = config.media[index];
 			media.set("currentFeedTitle", mediaList.title);
 			$("#navbar-mediacategories").data("kendoMobileNavBar").title(mediaList.title);

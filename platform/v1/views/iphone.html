@@ -571,6 +571,17 @@
 	</div>
 </div>
 
+<div data-role="modalview" id="locations" style="height:200px;width:90%;max-width:300px;">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<span data-role="view-title">Locations</span>
+        </div>
+    </header>
+	<div style="width:100%;max-width:280px;margin: 15px auto 10px auto;text-align:center;">
+		<ul id="list-locations"></ul>
+	</div>
+</div>
+
 
 <!-- ****** TEMPLATES ****** -->
 <script type="text/x-kendo-template" id="template-media-feed-item">
@@ -648,3 +659,7 @@
 <script type="text/x-kendo-template" id="template-music-track">
 	<a class="div-music-track">#=trackNumber#&nbsp;&nbsp;#=trackName#</a>
 </script>
+<script type="text/x-kendo-template" id="template-location">
+	<a>#=name#</a>
+</script>
+

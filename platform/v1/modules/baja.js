@@ -23,6 +23,7 @@ var baja = new kendo.data.ObservableObject({
 	modalOpen: false,
 	kendoTransition: "slide",
 	deviceCountry: "",
+	currentLocation: null,
 
 	init: function() {
 		config.appHttpRoot = resourceUrl + "app/" + clientId;
@@ -1023,6 +1024,27 @@ var baja = new kendo.data.ObservableObject({
 		}
 	},
 
+	showLocationPicker: function(callback) {
+		var view = $("#locations").data("kendoMobileModalView");
+		view.open();
+		baja.set("modalOpen", true);
+		if ($("#list-locations").data("kendoMobileListView") == null) {
+			$("#list-locations").kendoMobileListView({
+				dataSource: config.locations,
+				style: "inset",
+				template: $("#template-location").html(),
+				click: function(e) {
+					baja.set("currentLocation", e.dataItem);
+					var view = $("#locations").data("kendoMobileModalView");
+					view.close();
+					if (typeof callback == "function") {
+						callback();
+					}
+				}
+			});
+		}
+	},
+	
 	showForgotPassword: function() {
 		var view1 = $("#login").data("kendoMobileModalView");
 		view1.close();
@@ -1339,6 +1361,15 @@ var baja = new kendo.data.ObservableObject({
 					window.console && console.log(e);
 				}
 			);
+		}
+	},
+	
+	promptForLocation: function(callback) {
+		alert("Pick Location...");
+		var newLoc = { id:2, name:"Wellington", media:[2] };
+		baja.set("currentLocation", newLoc);
+		if (typeof callback == "function") {
+			callback(newLoc);
 		}
 	}
 	
