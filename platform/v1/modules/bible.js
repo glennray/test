@@ -174,6 +174,9 @@ var bible = new kendo.data.ObservableObject({
 		}
 
 		if (bible.get("planData") == null) {
+			if (config.platformHttpRoot == null) {
+				config.platformHttpRoot = resourceUrl + "platform/v1";
+			}
 			var planUrl = config.platformHttpRoot + config.bible.selectedPlan.url;
 			if (localStorage.getObject(config.bible.selectedPlan.url) != null) {
 				window.console && console.log("getting plan data from local storage");
