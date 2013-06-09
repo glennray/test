@@ -243,22 +243,32 @@
     "media": [
     	{
 			"index":0,
-            "id": "podcast_derby",
+            "id": "vimeo_derby",
             "title": "Messages (Derby)",
             "type": "rss",
+            "wifiOnly":true,
             "url": {
-				"android": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
-				"ipad": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml",
-				"iphone": "http://aviatorchurchnorthwichita.podomatic.com/rss2.xml"
+				"android": "http://vimeo.com/aviatorchurch/videos/rss",
+				"iphone": "http://vimeo.com/aviatorchurch/videos/rss",
+				"ipad": "http://vimeo.com/aviatorchurch/videos/rss"
 			},
-            "itemType": "audio",
+            "itemType": "video",
 			"items": {
 				"xmlpath":"channel > item",
+				"id": { "method":"find", "node":"link" },
 				"date": { "method":"find", "node":"pubDate" },
 				"title": { "method":"child", "node":"title" },
-				"author": { "method": "find", "node":"author" },
-				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
-				"length": { "method":"find", "node":"duration" }
+				"author": { "method": "find", "node":"creator" },
+				"thumbnail": { "method": "find", "node":"thumbnail" },
+				"urlVideo": { 
+					"method": "find",
+					"node": {
+						"iphone":"link",
+						"ipad":"link",
+						"android":"link"
+					}
+				},
+				"urlSocial": { "method":"find", "node":"link" }
 			}
         },
         {
