@@ -26,6 +26,11 @@ var baja = new kendo.data.ObservableObject({
 	currentLocation: null,
 
 	init: function() {
+		if (config.locations != null && config.locations.length > 0) {
+			if (localStorage.getObject("currentLocation") != null) {
+				baja.set("currentLocation", localStorage.getObject("currentLocation"));
+			}
+		}
 		config.appHttpRoot = resourceUrl + "app/" + clientId;
 		if (localStorage.getObject("runOnce") == null) {
             localStorage.setObject("user", null);
@@ -939,6 +944,13 @@ var baja = new kendo.data.ObservableObject({
 	},
 
     initSettings: function(e) {
+    	if (config.locations != null && config.locations.length > 0) {
+    		$("#divSettingsLocations,#listSettingsLocations").show();
+    		$("#s-location").before("<span class='settings-label'>Location</span>");
+    	}
+    	else {
+    		$("#divSettingsLocations,#listSettingsLocations").hide();
+    	}
         $("#s-font").before("<span class='settings-label'>Font</span>");
         $("#s-font-size").before("<span class='settings-label'>Font Size</span>");
 		var event = $.Event("app-settings-init");
@@ -948,6 +960,10 @@ var baja = new kendo.data.ObservableObject({
 	showSettings: function(e) {
 		baja.trackView("/settings");
 		if (bible !== undefined) {
+			if (config.locations != null && config.locations.length > 0) {
+				var location = baja.get("currentLocation");
+				$("#s-location").text(location != null ? location.name : "None");
+			}
 			$("#s-font").text(fonts[bible.get("font")-1]);
 			$("#s-font-size").text(bible.get("fontSize"));
 			var isLowLight = bible.get("textDisplay") == "lowlight" ? true : false;
@@ -955,6 +971,27 @@ var baja = new kendo.data.ObservableObject({
 		}
 	},
 
+	initSettingsLocations: function(e) {
+		$("#list-settings-locations").kendoMobileListView({
+			dataSource: config.locations,
+			style: "inset",
+			template: $("#template-location").html(),
+			click: function(e) {
+				var location = e.dataItem;
+				baja.setCurrentLocation(location);
+				$("#list-settings-locations li a").removeClass("selected");
+				$("#list-settings-locations li a[ref='" + (location != null ? location.id : "") + "']").addClass("selected");
+				app.navigate("#:back");
+			}
+		});
+	},
+	
+	showSettingsLocations: function(e) {
+		var location = baja.get("currentLocation");
+		$("#list-settings-locations li a").removeClass("selected");
+		$("#list-settings-locations li a[ref='" + (location != null ? location.id : "") + "']").addClass("selected");
+	},
+	
 	showFont:  function(e) {
 		baja.trackView("/settings-font");
 		if (bible != undefined) {
@@ -1024,6 +1061,11 @@ var baja = new kendo.data.ObservableObject({
 		}
 	},
 
+	setCurrentLocation: function(location) {
+		baja.set("currentLocation", location);
+		localStorage.setObject("currentLocation", location);
+	},
+	
 	showLocationPicker: function(callback) {
 		var view = $("#locations").data("kendoMobileModalView");
 		view.open();
@@ -1034,7 +1076,7 @@ var baja = new kendo.data.ObservableObject({
 				style: "inset",
 				template: $("#template-location").html(),
 				click: function(e) {
-					baja.set("currentLocation", e.dataItem);
+					baja.setCurrentLocation(e.dataItem);
 					var view = $("#locations").data("kendoMobileModalView");
 					view.close();
 					if (typeof callback == "function") {

@@ -490,6 +490,13 @@
         </div>
     </header>
     <div>
+    	<div id="divSettingsLocations" class="list-section">General Options</div>
+    	<ul id="listSettingsLocations" data-role="listview" data-style="inset">
+    		<li>
+    			<a id="s-location" href="#settings-locations" class="settings-value"></a>
+    		</li>
+    	</ul>
+    	
     	<div class="list-section">Bible Reading Options</div>
     	<ul data-role="listview" data-style="inset">
     		<li>
@@ -582,6 +589,16 @@
 	</div>
 </div>
 
+<div data-role="view" id="settings-locations" data-title="Select Location" data-init="baja.initSettingsLocations" data-show="baja.showSettingsLocations">
+	<header data-role="header">
+        <div data-role="navbar">
+        	<a data-role="backbutton" data-align="left" data-glyph-gray=",">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <ul id="list-settings-locations"></ul>
+</div>
+
 
 <!-- ****** TEMPLATES ****** -->
 <script type="text/x-kendo-template" id="template-media-feed-item">
@@ -660,6 +677,6 @@
 	<a class="div-music-track">#=trackNumber#&nbsp;&nbsp;#=trackName#</a>
 </script>
 <script type="text/x-kendo-template" id="template-location">
-	<a>#=name#</a>
+	<a ref="#=id#">#=name#</a>
 </script>
 
