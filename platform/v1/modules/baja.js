@@ -102,6 +102,7 @@ var baja = new kendo.data.ObservableObject({
 				   dataType: "html",
 				   async: false,
 				   cache: false,
+				   beforeSend: function (xhr) { },
 				   success: function(content) {
 					   var stylesheet = $("<style></style>").append(content);
 					   $("head").append(stylesheet);
@@ -145,6 +146,7 @@ var baja = new kendo.data.ObservableObject({
 					dataType: "html",
 					async: false,
 					cache: false,
+				    beforeSend: function (xhr) { },
 					success: function(content) {
 						$(appElement).append(content);
 						localStorage.setObject("views.html", content);
@@ -196,6 +198,7 @@ var baja = new kendo.data.ObservableObject({
 				dataType: "html",
 				async: false,
 				cache: false,
+			    beforeSend: function (xhr) { },
 				success: function(content) {
 					$(appElement).append(content);
 				}

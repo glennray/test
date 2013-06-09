@@ -192,6 +192,7 @@ var bible = new kendo.data.ObservableObject({
 					type: "GET",
 					dataType: "json",
 					async: false,
+				    beforeSend: function (xhr) { },
 					success: function(data) {
 						window.console && console.log("got remote plan data");
 						bible.set("planData", data);
