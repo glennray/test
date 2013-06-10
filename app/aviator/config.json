@@ -54,20 +54,14 @@
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
 				{ "title":"Messages", "icon":"2", "tab":"tabMedia", "click":"media.navigateToFeed(0,'none')" },
+				{ "title":"What's Hot", "icon":"Y", "tab":"clear", "click":"media.navigateToFeed(2,'none')" },
+				{ "title":"<span style='line-height:15px;'>Time &amp;<br/>Location</span>", "icon":"5", "tab":"clear", "click":"media.navigateToFeed(1,'none')" },
 				{ "title":"Give", "icon":"X", "tab":"clear", "click":"baja.loadUrlNoLocation('https://app.easytithe.com/g/?uid=avia1134')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
 				{ "title":"Instagram", "icon":"?", "tab":"clear", "click":"baja.loadUrlNative(config.instagram.url)" },
 				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
 				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
 				{ "title":"Journal", "icon":"M", "tab":"tabJournal", "click":"app.navigate('journal')" }
-			]}
-		]
-	},
-	"home_unused":{
-		"widgets": [
-			{ "type":"container", "widgets":[
-				{ "title":"What's Hot", "icon":"Y", "tab":"clear", "click":"media.navigateToFeed(1,'none')" },
-				{ "title":"<span style='line-height:15px;'>Times &amp;<br/>Locations</span>", "icon":"5", "tab":"clear", "click":"media.navigateToFeed(2,'none')" }
 			]}
 		]
 	},
@@ -309,6 +303,138 @@
 				"author": { "method": "find", "node":"author" },
 				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
 				"length": { "method":"find", "node":"duration" }
+			}
+        },
+        {
+			"index":3,
+            "id": "info",
+            "title": "Time & Location",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/derby/category/times/feed/",
+				"iphone": "http://aviatorchurch.com/derby/category/times/feed/",
+				"ipad": "http://aviatorchurch.com/derby/category/times/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"titlex" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":4,
+            "id": "info",
+            "title": "Time & Location",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/northwichita/category/times/feed/",
+				"iphone": "http://aviatorchurch.com/northwichita/category/times/feed/",
+				"ipad": "http://aviatorchurch.com/northwichita/category/times/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"titlex" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":5,
+            "id": "info",
+            "title": "Time & Location",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/wellington/category/times/feed/",
+				"iphone": "http://aviatorchurch.com/wellington/category/times/feed/",
+				"ipad": "http://aviatorchurch.com/wellington/category/times/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"titlex" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":6,
+            "id": "info",
+            "title": "Events",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/derby/category/events/feed/",
+				"iphone": "http://aviatorchurch.com/derby/category/events/feed/",
+				"ipad": "http://aviatorchurch.com/derby/category/events/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":7,
+            "id": "info",
+            "title": "Events",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/northwichita/category/events/feed/",
+				"iphone": "http://aviatorchurch.com/northwichita/category/events/feed/",
+				"ipad": "http://aviatorchurch.com/northwichita/category/events/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
+			}
+        },
+        {
+			"index":8,
+            "id": "info",
+            "title": "Events",
+            "type": "rss",
+            "wifiOnly":false,
+            "neverShowOneItem":true,
+            "url": {
+				"android": "http://aviatorchurch.com/wellington/category/events/feed/",
+				"iphone": "http://aviatorchurch.com/wellington/category/events/feed/",
+				"ipad": "http://aviatorchurch.com/wellington/category/events/feed/"
+			},
+            "itemType": "content",
+			"items": {
+				"xmlpath":"channel > item",
+				"date": { "method":"find", "node":"pubDate" },
+				"title": { "method":"child", "node":"title" },
+				"author": { "method": "find", "node":"dc:creator" },
+				"html": { "method":"find", "node":"encoded" },
+				"urlSocial": { "method":"find", "node":"link" }
 			}
         }
     ]

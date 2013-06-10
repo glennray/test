@@ -387,6 +387,9 @@ var media = new kendo.data.ObservableObject({
 					$("#div-content-html a").each(function(index) {
 						$(this).removeAttr("href");
 					});
+					$("#div-content-html iframe").each(function(index) {
+						$(this).attr("width", "100%");
+					});
 				}
 			}
 		});
