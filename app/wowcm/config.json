@@ -22,13 +22,10 @@
     "googlePlayUrl":"http://googleplayurl.com",
     "analyticsId":"UA-31814203-18",
     "facebook": {
-    	"appId":"00000000000000000", "url":"https://www.facebook.com/aaaaaaaaaa"
+    	"appId":"386295698157195", "url":"https://www.facebook.com/"
     },
     "twitter": {
-    	"url":"http://twitter.com/aaaaaaaaaaaa"
-    },
-    "instagram": {
-    	"url":"http://instagram.com/aaaaaaaaaaaaa"
+    	"url":"http://twitter.com/"
     },
     "menu": {
         "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
@@ -53,9 +50,7 @@
 			{ "type":"logo" },
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
-				{ "title":"Give", "icon":"X", "tab":"clear", "click":"baja.loadUrlNoLocation('')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
-				{ "title":"Instagram", "icon":"?", "tab":"clear", "click":"baja.loadUrlNative(config.instagram.url)" },
 				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
 				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
 				{ "title":"Journal", "icon":"M", "tab":"tabJournal", "click":"app.navigate('journal')" }
@@ -94,21 +89,21 @@
         }
     ],
     "sharing": {
-    	"sentByText": "Sent by Aviator Church Bible and Journal App.",
-    	"sentByHtml": " Sent by <a href='{storeUrl}'>Aviator Church Bible and Journal App</a>.",
-    	"sentByTwitter": "via @aviatorchurch",
+    	"sentByText": "Sent by Word of Wisdom Bible and Journal App.",
+    	"sentByHtml": " Sent by <a href='{storeUrl}'>Word of Wisdom Bible and Journal App</a>.",
+    	"sentByTwitter": "via @",
 		"facebook": {
-			"title": "Aviator Church",
-			"shareUrl":"http://aviatorchurch.com/",
-			"shareText":"Aviator Church"
+			"title": "Word of Wisdom",
+			"shareUrl":"http://www.wowcm.org/",
+			"shareText":"Word of Wisdom"
 		},
 		"twitter": {
-			"shareUrl":"@aviatorchurch",
+			"shareUrl":"@",
 			"shareText":""
 		},
 		"email": {
-			"shareSubject":"Check out my Bible and Journal App from Aviator Church",
-			"shareBody":"I am using Aviator Church Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
+			"shareSubject":"Check out my Bible and Journal App from Word of Wisdom",
+			"shareBody":"I am using Word of Wisdom Bible and Journal App. You should <a href='{storeUrl}'>check it out</a>."
 		}
 	},
     "bible": {
