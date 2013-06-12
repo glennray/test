@@ -148,7 +148,7 @@ input.error::-webkit-input-placeholder { color:#a00; }
 .widget-outer { width:100%;box-sizing:border-box;padding:10px 10px 0 10px; }
 .widget-inner { width:100%;border-spacing:2px;box-sizing:border-box; }
 .widget-container { width:603px;box-sizing:border-box;margin:0 auto;text-align:center; }
-.widget-container-cell { display:inline-block;width:97px;margin-right:4px;color:#7D7E81;text-transform:uppercase;padding-top:18px;line-height:23px;border:1px solid #ddd;border-radius:3px;height:90px;background-color:#fff;box-sizing:border-box;text-align:center; }
+.widget-container-cell { display:inline-block;vertical-align:top;width:97px;margin-right:4px;color:#7D7E81;text-transform:uppercase;padding-top:18px;line-height:23px;border:1px solid #ddd;border-radius:3px;height:90px;background-color:#fff;box-sizing:border-box;text-align:center; }
 .widget-container-cell:nth-child(6), .widget-container-cell:nth-child(12) { width:98px;margin:0; }
 .km-pages { margin-top:8px !important; }
 
