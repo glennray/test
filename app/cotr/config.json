@@ -5,17 +5,17 @@
     "validateEmailUrl": "https://dashboard.bibleandjournalapp.com/api/Users/IsEmailInUse",
     "resetPasswordUrl":"https://dashboard.bibleandjournalapp.com/api/Users/ResetPassword",
     "ios": {
-    	"views": { "url":"platform/v1/views/iphone.html", "version":4 },
-    	"tabletViews": { "url":"platform/v1/views/ipad.html", "version":4 },
-    	"css": { "url":"platform/v1/css/iphone.css", "version":5 },
-    	"tabletCss": { "url":"platform/v1/css/ipad.css", "version":5 },
+    	"views": { "url":"platform/v1/views/iphone.html", "version":7 },
+    	"tabletViews": { "url":"platform/v1/views/ipad.html", "version":7 },
+    	"css": { "url":"platform/v1/css/iphone.css", "version":7 },
+    	"tabletCss": { "url":"platform/v1/css/ipad.css", "version":7 },
     	"transition":"slide"
     },
     "android": {
-    	"views": { "url":"platform/v1/views/android.html", "version":3 },
-    	"tabletViews": { "url":"platform/v1/views/android.html", "version":3 },
-    	"css": { "url":"platform/v1/css/android.css", "version":4 },
-    	"tabletCss": { "url":"platform/v1/css/android.css", "version":4 },
+    	"views": { "url":"platform/v1/views/android.html", "version":7 },
+    	"tabletViews": { "url":"platform/v1/views/android.html", "version":7 },
+    	"css": { "url":"platform/v1/css/android.css", "version":7 },
+    	"tabletCss": { "url":"platform/v1/css/android.css", "version":7 },
     	"transition":"fade"
     },
     "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=572227607",
@@ -47,14 +47,14 @@
 		}
 	],
 	"modules": [
-		{ "id":"home", "version":3 },
-		{ "id":"baja", "version":4 },
-		{ "id":"audio", "version":3 },
-		{ "id":"bible", "version":6 },
-		{ "id":"journal", "version":3 },
-		{ "id":"media", "version":8 },
-		{ "id":"calendar", "version":3 },
-		{ "id":"utils", "version":3 }
+		{ "id":"home", "version":9 },
+		{ "id":"baja", "version":9 },
+		{ "id":"audio", "version":9 },
+		{ "id":"bible", "version":9 },
+		{ "id":"journal", "version":9 },
+		{ "id":"media", "version":9 },
+		{ "id":"calendar", "version":9 },
+		{ "id":"utils", "version":9 }
 	],
 	"home":{
 		"widgets": [
