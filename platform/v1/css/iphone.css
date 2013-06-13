@@ -3,6 +3,8 @@
   src: url(baja.ttf);
 }
 
+#divTouch { position:fixed;bottom:48px;z-index:99999;height:48px;line-height:48px;text-align:center;width:100%;box-sizing:border-box;background-color:#fff;color:#666;text-transform:uppercase;font-size:8pt;opacity:1;border-top:1px solid #aaa; }
+
 [data-glyph]:before, [data-glyph-gray]:before, [data-glyph-gray-small]:before, [data-glyph-large]:before, [data-glyph-tiny]:before,
 [data-glyph-small]:before, [data-glyph-tab]:before, [data-glyph-nav]:before, [data-glyph-audio]:before, [data-glyph-widget]:before, [data-glyph-smaller]:before  {
 	font-family:Baja;
@@ -421,8 +423,6 @@ div.media-item-detail #div-content-html img { max-width:100%; height:inherit !im
 #media-button-fb .facebook-button .bigtext { font-size:16pt; }
 #media-button-fb .facebook-icon { position:absolute;top:6px;left:8px;font-family:Baja;font-size:24pt;color:#fff; }
 
-
-
 /****** KENDO STYLE OVERRIDE ******/
 .km-pane { -webkit-transform: translateZ(0) !important;-webkit-transition:left 200ms ease-in !important; }
 .km-button {
@@ -499,6 +499,9 @@ button.format-button.km-button { font-size:1em;padding:3px 0 !important;margin:0
 button.format-button:last-child { margin:0 !important;padding:0 5px !important;border-left:1px solid #ccc !important;position:relative;top:-2px; }
 button.format-button:last-child:before { top:0; }
 button.format-button.km-button.button-on { background-color:#666 !important;background-image:none !important;color:#fff !important; }
+
+#divTouch {  }
+
 
 /****** TABS ******/
 .km-tabstrip { box-shadow:none !important; }
