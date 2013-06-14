@@ -54,8 +54,6 @@
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
 				{ "title":"Give", "icon":"X", "tab":"tabHome", "click":"baja.loadUrlNoLocation('https://activatechurch.cheergive.com/')" },
-				{ "title":"Directions", "icon":"5", "tab":"clear", "click":"baja.loadUrlNative('http://www.activatechurch.org/directions')" },
-				{ "title":"Calendar", "icon":"+", "tab":"clear", "click":"baja.loadUrlNative('http://www.activatechurch.org/content.cfm?id=102')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
 				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
 				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
@@ -63,6 +61,10 @@
 			]}
 		]
 	},
+	"unused": [
+		{ "title":"Directions", "icon":"5", "tab":"clear", "click":"baja.loadUrlNative('http://www.activatechurch.org/directions')" },
+		{ "title":"Calendar", "icon":"+", "tab":"clear", "click":"baja.loadUrlNative('http://www.activatechurch.org/content.cfm?id=102')" }
+	],
     "tabs": [
         {
             "id": "tabHome",
