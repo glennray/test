@@ -57,6 +57,7 @@
 
 <!-- LAYOUTS -->
 <div data-role="layout" data-id="main">
+	
 	<ul data-role="actionsheet" id="sharing">
 		<li>
 			<div style="height:160px;width:100%;">
@@ -77,6 +78,15 @@
 	</ul>
 	<div data-role="footer">
 		<div id="custom-tabstrip" data-role="tabstrip"></div>
+		
+		<div id="divTouch">
+			<span class="tab-proclaim" data-glyph-signal-small="`"></span>
+			<div id="signal-handle">
+				<div class="wrapper" data-role="scroller">
+					<div id="list-proclaim-signals"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -679,5 +689,8 @@
 </script>
 <script type="text/x-kendo-template" id="template-location">
 	<a ref="#=id#">#=name#</a>
+</script>
+<script type="text/x-kendo-template" id="template-proclaim-signal">
+	<span id="#=id#" data-glyph-signal="#=icon#" class="proclaim-signal-icon"></span><span class="proclaim-signal-title">#=title#</span>
 </script>
 

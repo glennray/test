@@ -22,9 +22,6 @@
     "appStoreUrl":"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=528950595",
     "googlePlayUrl":"http://googleplayurl.com",
     "analyticsId":"UA-31814203-10",
-    "bajaAppId":"baja",
-    "appHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/app/baja",
-    "platformHttpRoot":"https://dashboard.bibleandjournalapp.com/resourceslive/platform/v1",
     "facebook": {
     	"appId":"218600301539546", "url":"http://www.facebook.com/PursueGod"
     },
@@ -50,6 +47,7 @@
 		{ "id":"journal", "version":6 },
 		{ "id":"media", "version":6 },
 		{ "id":"calendar", "version":6 },
+		{ "id":"proclaim", "version":6 },
 		{ "id":"utils", "version":6 }
 	],
 	"home":{
@@ -108,6 +106,11 @@
             "defaultTab": false
         }
     ],
+    "proclaim": {
+		"groupId":3576617,
+		"baseUrl":"http://proclaimservices.logos.com/v1/onair",
+		"endpoint":"/request.ashx"
+    },
     "sharing": {
     	"sentByText": "Sent by Pursue Bible and Journal App.",
     	"sentByHtml": " Sent by <a href='{storeUrl}'>Pursue Bible and Journal App</a>.",

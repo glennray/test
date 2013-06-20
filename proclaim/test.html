@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Proclaim Signals Test</title>
+	<style>
+		body { font-family:sans-serif;margin:15px; }
+		.signal { background-color:#ffc;padding:10px;font-size:9pt;font-family:"Consolas";box-shadow:1px 1px 2px #aaa;margin-top:10px;margin-right:200px; }
+		.webaddress { background-color:#acf; }
+		.calendarevent { background-color:#fcc; }
+		.donationrequest { background-color:#cfc;
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="websync.client.js"></script>
+	<script>
+	var util = fm.utilities;
+	var groupId = "3576617";
+	var channelId;
+	var signals = [];
+
+	$(document).ready(function() {
+		fm.websync.client.initialize({ requestUrl: "http://proclaimservices.logos.com/v1/onair/request.ashx" });
+		
+		$(document).on("presentation-started", function(e) {
+			if (e.response.onAir[0].id) {
+				channelId = e.response.onAir[0].id;
+				getSignals(channelId, function(data) {
+					console.log(data);
+					displaySignals(data.activeSignalIds);
+					connect(function() {
+						subscribe(channelId, "signaled");
+						subscribe(channelId, "stopped");
+					});
+				});
+			}
+		});
+		
+		checkForPresentation(groupId);
+	});
+
+	function checkForPresentation(groupId, interval) {
+		if (!interval) interval = 5000;
+		$.ajax({
+			url: "http://proclaimservices.logos.com/v1/onair?groupIds=" + groupId,
+			type: "GET",
+			dataType: "json",
+			success: function(response) {
+				if (response.onAir && response.onAir.length > 0) {
+					var event = $.Event("presentation-started");
+					event.response = response;
+					$(document).trigger(event);
+					$("#divNothing").hide();
+				}
+				else {
+					$("#divNothing").show();
+					setTimeout(function() { checkForPresentation(groupId) }, interval);
+				}
+			},
+			error: function(xhr, status, errorThrown) {
+				$(document.body).append("<div>" + errorThrown + "</div>");
+			}
+		});
+	}
+
+	function getSignals(channelId, success) {
+		$.ajax({
+			url: "http://proclaimservices.logos.com/v1/onair/" + channelId + "/signals",
+			type: "GET",
+			dataType: "json",
+			success: function(response) {
+				signals = response.signals;
+				if (typeof success == "function") {
+					success(response);
+				}
+			},
+			error: function(xhr, status, errorThrown) {
+				$(document.body).append("<div>" + errorThrown + "</div>");
+			}
+		});
+	}
+
+	function connect(onConnected) {
+		fm.websync.client.connect({
+			onSuccess: function(args) {
+				util.log('Connected!');
+				if (typeof onConnected == "function") {
+					onConnected(args);
+				}
+			},
+			onFailure: function(args) {
+				util.log('Could not connect: ' + args.error);
+			},
+			onStreamFailure: function(args) {
+				if (args.willReconnect) util.log('Connection to server lost, reconnecting...');
+				else util.log('Connection to server lost permanently.');
+			}
+		});
+	}
+
+	function subscribe(channelId, path) {
+		fm.websync.client.subscribe({
+			channel: "/onair/" + channelId + "/" + path,
+			onSuccess: function(args) {
+				util.log('Subscribed: ' + path);
+			},
+			onFailure: function(args) {
+				util.log('Could not subscribe: ' + args.error);
+			},
+			onReceive: function(args) {
+				// stopped
+				if (args.channel.indexOf("/stopped") > -1) {
+					$(".signal").remove();
+					signals = null;
+					unsubscribe(args.channel);
+					unsubscribe(args.channel.replace("/stoppped", "/signaled"), function(args) {
+						checkForPresentation(groupId);
+					});
+				}
+				
+				// signaled
+				if (args.data.signalIds) {
+					displaySignals(args.data.signalIds);
+				}
+			}
+		});
+	}
+
+	function unsubscribe(channel, success) {
+		fm.websync.client.unsubscribe({
+			channel: channel,
+			onSuccess: function(args) {
+				util.log('Unsubscribed!');
+				if (typeof success == "function") {
+					success(args);
+				}
+			},
+			onFailure: function(args) {
+				util.log('Could not unsubscribe: ' + args.error);
+			}
+		});
+	}
+	
+	function displaySignals(signalIds) {
+		for(var i=0; i <signalIds.length;i++) {
+			console.log(signalIds[i]);
+			for(var j=0;j < signals.length;j++) {
+				if (signals[j].id == signalIds[i]) {
+					$(document.body).append("<div class='signal " +  signals[j].signalKind.toLowerCase() +"'>" + JSON.stringify(signals[j]) + "</div>");
+				}
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<h3>Proclaim Signals Test</h3>
+	<div id="divNothing">No presentation active<div>
+</body>
+</html>
