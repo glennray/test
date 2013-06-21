@@ -22,10 +22,10 @@
     "googlePlayUrl":"http://googleplayurl.com",
     "analyticsId":"UA-31814203-18",
     "facebook": {
-    	"appId":"386295698157195", "url":"https://www.facebook.com/"
+    	"appId":"386295698157195", "url":"https://www.facebook.com/WOWCM"
     },
     "twitter": {
-    	"url":"http://twitter.com/"
+    	"url":"http://twitter.com/wordofwisdomcm"
     },
     "menu": {
         "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
@@ -47,11 +47,14 @@
 	],
 	"home":{
 		"widgets": [
-			{ "type":"logo" },
+			{ "type":"logo", "image":"wowcm.jpg" },
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
-				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
-				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
+				{ "title":"Give", "icon":"X", "tab":"tabHome", "click":"baja.loadUrlNoLocation('https://wowcm.cheergive.com/')" },
+				{ "title":"Web Site", "icon":"5", "tab":"tabHome", "click":"baja.loadUrlNative('http://www.wowcm.org/')" },
+				{ "title":"Calendar", "icon":"+", "tab":"tabHome", "click":"baja.loadUrlNative('http://www.wowcm.org/silver/calendar/calendar.asp?sregid=911200713518')" },
+				{ "title":"Facebook", "icon":"T", "tab":"tabHome", "click":"baja.loadUrlNative(config.facebook.url)" },
+				{ "title":"Twitter", "icon":"R", "tab":"tabHome", "click":"baja.loadUrlNative(config.twitter.url)" },
 				{ "title":"Bible", "icon":"U", "tab":"tabBible", "click":"app.navigate('bible')" },
 				{ "title":"Journal", "icon":"M", "tab":"tabJournal", "click":"app.navigate('journal')" }
 			]}
@@ -91,14 +94,14 @@
     "sharing": {
     	"sentByText": "Sent by Word of Wisdom Bible and Journal App.",
     	"sentByHtml": " Sent by <a href='{storeUrl}'>Word of Wisdom Bible and Journal App</a>.",
-    	"sentByTwitter": "via @",
+    	"sentByTwitter": "via @wordofwisdomcm",
 		"facebook": {
 			"title": "Word of Wisdom",
 			"shareUrl":"http://www.wowcm.org/",
 			"shareText":"Word of Wisdom"
 		},
 		"twitter": {
-			"shareUrl":"@",
+			"shareUrl":"@wordofwisdomcm",
 			"shareText":""
 		},
 		"email": {

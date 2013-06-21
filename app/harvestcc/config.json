@@ -25,7 +25,7 @@
     	"appId":"455251067904216", "url":"https://www.facebook.com/harvestcc"
     },
     "twitter": {
-    	"url":"http://twitter/harvest_cc", "key":"wNYilmrj7xVUVZzrbI0VXQ", "secret":"OSAzKWza8eCkFVA4jNb2rLfBkXgGf57hnisKE1NPADg"
+    	"url":"http://twitter.com/harvest_cc"
     },
     "menu": {
         "urlFeedback":"https://bibleandjournalapp.zendesk.com/forums/21135758-feedback",
@@ -50,7 +50,7 @@
 			{ "type":"logo" },
 			{ "type":"reading-plan" },
 			{ "type":"container", "widgets":[
-				{ "title":"Sermons", "icon":"!", "tab":"tabMedia", "click":"app.navigate('media-categories?i=0', 'none')" },
+				{ "title":"Blog", "icon":":", "tab":"tabMedia", "click":"app.navigate('media-categories?i=0', 'none')" },
 				{ "title":"Live", "icon":"=", "tab":"clear", "click":"baja.loadUrlNative('http://www.calgaryfullgospel.com/watch.php')" },
 				{ "title":"Facebook", "icon":"T", "tab":"clear", "click":"baja.loadUrlNative(config.facebook.url)" },
 				{ "title":"Twitter", "icon":"R", "tab":"clear", "click":"baja.loadUrlNative(config.twitter.url)" },
@@ -70,8 +70,8 @@
 		{
             "id": "tabMedia",
             "view": "media-categories?i=0",
-            "label": "Sermons",
-            "icon": "!",
+            "label": "Blog",
+            "icon": ":",
             "defaultTab": false
         },
 		{
@@ -226,22 +226,22 @@
     "media": [
     	{
 			"index":0,
-            "id": "podcast",
-            "title": "Sermons",
+            "id": "blog",
+            "title": "Blog",
             "type": "rss",
+            "wifiOnly":false,
             "url": {
-				"android": "http://calgaryfullgospel.libsyn.com/rss",
-				"ipad": "http://calgaryfullgospel.libsyn.com/rss",
-				"iphone": "http://calgaryfullgospel.libsyn.com/rss"
+				"android": "http://changedlives.tumblr.com/rss",
+				"iphone": "http://changedlives.tumblr.com/rss",
+				"ipad": "http://changedlives.tumblr.com/rss"
 			},
-            "itemType": "audio",
+            "itemType": "content",
 			"items": {
 				"xmlpath":"channel > item",
 				"date": { "method":"find", "node":"pubDate" },
 				"title": { "method":"child", "node":"title" },
-				"author": { "method": "find", "node":"author" },
-				"urlAudio": { "method": "find", "node":"enclosure", "attribute":"url" },
-				"length": { "method":"find", "node":"duration" }
+				"html": { "method":"find", "node":"description" },
+				"urlSocial": { "method":"find", "node":"link" }
 			}
         }
     ]
